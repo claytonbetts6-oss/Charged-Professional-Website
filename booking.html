@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Book a Detail — Charged Professional Detailing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          brand: {
+            blue: '#1E5BFF',
+            blueDark: '#0E3BCC',
+            ink: '#0A0F1F',
+            paper: '#FFFFFF',
+            mist: '#F4F6FB',
+          },
+        },
+        fontFamily: {
+          display: ['Anton', 'sans-serif'],
+          sans: ['Inter', 'system-ui', 'sans-serif'],
+        },
+        boxShadow: {
+          card: '0 20px 60px -25px rgba(30, 91, 255, 0.35)',
+          soft: '0 10px 40px -20px rgba(10, 15, 31, 0.25)',
+        },
+      },
+    },
+  };
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', system-ui, sans-serif; color: #0A0F1F; background: #FFFFFF; }
+  .display { font-family: 'Anton', sans-serif; letter-spacing: -0.01em; }
+
+  .bolt-divider { height: 4px; width: 56px; background: #1E5BFF; border-radius: 2px; }
+
+  .btn-primary {
+    background: #1E5BFF; color: #FFFFFF;
+    transition: transform 200ms cubic-bezier(.2,.8,.2,1), background-color 200ms ease, box-shadow 200ms ease;
+    box-shadow: 0 12px 30px -10px rgba(30,91,255,0.6);
+  }
+  .btn-primary:hover { background: #0E3BCC; transform: translateY(-2px); }
+  .btn-primary:active { transform: translateY(0); }
+  .btn-primary:focus-visible { outline: 2px solid #0A0F1F; outline-offset: 3px; }
+  .btn-primary:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+
+  .btn-ghost {
+    border: 1.5px solid rgba(10,15,31,0.18); color: #0A0F1F; background: #FFFFFF;
+    transition: transform 200ms cubic-bezier(.2,.8,.2,1), background-color 200ms ease, border-color 200ms ease;
+  }
+  .btn-ghost:hover { border-color: #1E5BFF; color: #1E5BFF; transform: translateY(-2px); }
+  .btn-ghost:focus-visible { outline: 2px solid #1E5BFF; outline-offset: 3px; }
+
+  .btn-wa { background: #25D366; color: #062b15; }
+  .btn-wa:hover { background: #1ebe5b; }
+
+  .bolt {
+    display: inline-block; width: 14px; height: 18px; background: #1E5BFF;
+    clip-path: polygon(55% 0, 0 60%, 40% 60%, 25% 100%, 100% 35%, 55% 35%);
+    vertical-align: -3px; margin: 0 4px;
+  }
+
+  .eyebrow { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: #1E5BFF; font-weight: 600; }
+
+  .field {
+    background: #FFFFFF; border: 1.5px solid rgba(10,15,31,0.12); border-radius: 10px;
+    padding: 14px 16px; width: 100%;
+    transition: border-color 200ms ease, box-shadow 200ms ease; font-size: 15px;
+  }
+  .field:focus { outline: none; border-color: #1E5BFF; box-shadow: 0 0 0 4px rgba(30,91,255,0.15); }
+
+  /* Booking section card */
+  .b-card { background: #FFFFFF; border: 1px solid rgba(10,15,31,0.08); border-radius: 18px; }
+
+  /* Step number badge */
+  .step-num {
+    width: 34px; height: 34px; border-radius: 999px; background: #1E5BFF; color: #fff;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: 'Anton', sans-serif; font-size: 15px;
+  }
+
+  /* Selectable option cards (services + conditions) */
+  .opt {
+    position: relative; border: 1.5px solid rgba(10,15,31,0.12); border-radius: 14px;
+    background: #fff; cursor: pointer; display: block;
+    transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms cubic-bezier(.2,.8,.2,1), background-color 200ms ease;
+  }
+  .opt:hover { border-color: rgba(30,91,255,0.5); transform: translateY(-2px); }
+  .opt input { position: absolute; opacity: 0; pointer-events: none; }
+  .opt input:focus-visible + .opt-body { outline: 2px solid #1E5BFF; outline-offset: 2px; border-radius: 12px; }
+  .opt:has(input:checked) {
+    border-color: #1E5BFF; background: rgba(30,91,255,0.05);
+    box-shadow: 0 14px 34px -22px rgba(30,91,255,0.55);
+  }
+  .opt .tick { opacity: 0; transition: opacity 150ms ease; }
+  .opt:has(input:checked) .tick { opacity: 1; }
+
+  /* Calendar */
+  .cal-day {
+    aspect-ratio: 1 / 1; border-radius: 10px; font-size: 14px; font-weight: 500;
+    display: flex; align-items: center; justify-content: center;
+    transition: background-color 150ms ease, color 150ms ease, transform 150ms ease;
+  }
+  .cal-day.available { background: rgba(30,91,255,0.08); color: #0A0F1F; cursor: pointer; }
+  .cal-day.available:hover { background: rgba(30,91,255,0.18); transform: translateY(-1px); }
+  .cal-day.unavailable { color: rgba(10,15,31,0.25); cursor: not-allowed; }
+  .cal-day.selected { background: #1E5BFF; color: #fff; }
+  .cal-day.empty { background: transparent; }
+
+  .slot {
+    border: 1.5px solid rgba(10,15,31,0.14); border-radius: 10px; padding: 10px 8px;
+    font-size: 14px; font-weight: 600; cursor: pointer; text-align: center;
+    transition: border-color 150ms ease, background-color 150ms ease, color 150ms ease;
+  }
+  .slot:hover { border-color: #1E5BFF; }
+  .slot.selected { background: #1E5BFF; color: #fff; border-color: #1E5BFF; }
+
+  /* Photo dropzone */
+  .dropzone {
+    border: 2px dashed rgba(10,15,31,0.18); border-radius: 14px; padding: 28px;
+    text-align: center; cursor: pointer; transition: border-color 200ms ease, background-color 200ms ease;
+  }
+  .dropzone:hover { border-color: #1E5BFF; background: rgba(30,91,255,0.03); }
+
+  .nav-link { transition: color 200ms ease; }
+  .nav-link:hover { color: #1E5BFF; }
+
+  /* Floating contact buttons (mobile-friendly) */
+  .fab-wrap { position: fixed; right: 16px; bottom: 16px; z-index: 60; display: flex; flex-direction: column; gap: 10px; }
+  .fab {
+    width: 54px; height: 54px; border-radius: 999px; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 12px 30px -8px rgba(10,15,31,0.4); transition: transform 200ms cubic-bezier(.2,.8,.2,1);
+  }
+  .fab:hover { transform: translateY(-3px); }
+</style>
+</head>
+<body class="bg-brand-mist text-brand-ink antialiased">
+
+<!-- ============ NAV ============ -->
+<header class="sticky top-0 inset-x-0 z-50 bg-white border-b border-black/5">
+  <div class="max-w-5xl mx-auto px-5 sm:px-8 h-[80px] flex items-center justify-between">
+    <a href="index.html#top" class="flex items-center gap-2.5">
+      <img src="Assets/IMG_4336.jpg" alt="Charged Professional Detailing" class="h-12 sm:h-14 w-auto" />
+      <img src="Assets/logo-icon.jpg" alt="" class="h-12 sm:h-14 w-auto" />
+    </a>
+    <div class="flex items-center gap-2 sm:gap-3">
+      <a href="index.html" class="hidden sm:inline-flex nav-link text-sm font-medium px-3">← Back to site</a>
+      <a href="tel:+447709519480" class="btn-ghost inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-semibold">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92V20a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3.09a2 2 0 012 1.72c.13.96.37 1.9.72 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.38a2 2 0 012.11-.45c.91.35 1.85.59 2.81.72a2 2 0 011.72 2.12z"/></svg>
+        <span class="hidden sm:inline">Call</span>
+      </a>
+      <a href="https://wa.me/447709519480?text=Hi%20Charged%20Professional%20Detailing%2C%20I%27d%20like%20to%20book%20a%20detail." target="_blank" rel="noopener" class="btn-primary btn-wa inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-semibold">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.017-1.04 2.479 1.065 2.875 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+        <span>WhatsApp</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HEADER / INTRO ============ -->
+<section class="bg-brand-ink text-white">
+  <div class="max-w-5xl mx-auto px-5 sm:px-8 py-14 sm:py-20">
+    <div class="flex items-center gap-3 mb-5">
+      <span class="bolt"></span>
+      <span class="eyebrow text-white/90">Book Online</span>
+    </div>
+    <h1 class="display text-white text-[42px] leading-[0.95] sm:text-[64px] uppercase">
+      Book Your <span class="text-brand-blue">Detail</span>
+    </h1>
+    <p class="text-white/75 text-base sm:text-lg mt-5 max-w-2xl leading-relaxed">
+      Pick your services, tell us about your vehicle and choose a slot. We'll confirm your booking and send back a tailored quote. Adding photos helps us quote more accurately — it's optional.
+    </p>
+  </div>
+</section>
+
+<!-- ============ SETUP NOTICE (only shows until key is added) ============ -->
+<div id="setupNotice" class="hidden bg-amber-50 border-y border-amber-300 text-amber-900">
+  <div class="max-w-5xl mx-auto px-5 sm:px-8 py-3 text-sm">
+    <strong>Almost ready:</strong> add your free Web3Forms access key in <code>booking.html</code> to start receiving bookings by email. See the comment marked <code>SET YOUR ACCESS KEY</code> near the bottom of the file.
+  </div>
+</div>
+
+<!-- ============ FORM ============ -->
+<main class="max-w-5xl mx-auto px-5 sm:px-8 py-12 sm:py-16">
+  <form id="bookingForm" class="space-y-8" novalidate>
+
+    <!-- STEP 1: SERVICES -->
+    <section class="b-card p-6 sm:p-8 shadow-soft">
+      <div class="flex items-center gap-4 mb-2">
+        <span class="step-num">1</span>
+        <h2 class="display text-2xl sm:text-3xl uppercase">Choose your service(s)</h2>
+      </div>
+      <p class="text-brand-ink/60 text-sm mb-6 ml-[50px]">Select everything you're interested in — we'll advise on the best package.</p>
+      <div id="servicesGrid" class="grid sm:grid-cols-2 gap-3"></div>
+      <p id="servicesError" class="hidden text-sm text-red-600 mt-3">Please select at least one service.</p>
+
+      <div class="mt-8 pt-6 border-t border-black/10">
+        <h3 class="display text-lg uppercase mb-1">Add-ons <span class="text-brand-ink/40 text-base align-middle normal-case font-sans">(optional)</span></h3>
+        <p class="text-brand-ink/60 text-sm mb-4">Tick any extras you'd like added to your detail.</p>
+        <div id="addonsGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-0"></div>
+      </div>
+    </section>
+
+    <!-- STEP 2: VEHICLE DETAILS -->
+    <section class="b-card p-6 sm:p-8 shadow-soft">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="step-num">2</span>
+        <h2 class="display text-2xl sm:text-3xl uppercase">Vehicle details</h2>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-5">
+        <div class="sm:col-span-2">
+          <label class="text-xs uppercase tracking-widest text-brand-ink/60 font-semibold" for="vehicle">Make, model &amp; year *</label>
+          <input id="vehicle" name="vehicle" type="text" required class="field mt-2" placeholder="e.g. BMW 3 Series, 2019" />
+        </div>
+        <div class="sm:col-span-2">
+          <span class="text-xs uppercase tracking-widest text-brand-ink/60 font-semibold">Vehicle size * <span class="normal-case text-brand-ink/40">(sets your price)</span></span>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-2">
+            <label class="opt"><input type="radio" name="vehicle_size" value="Hatchback" required><div class="opt-body px-3 py-3 text-sm font-semibold text-center">Hatchback</div></label>
+            <label class="opt"><input type="radio" name="vehicle_size" value="Saloon"><div class="opt-body px-3 py-3 text-sm font-semibold text-center">Saloon</div></label>
+            <label class="opt"><input type="radio" name="vehicle_size" value="Estate / 4×4"><div class="opt-body px-3 py-3 text-sm font-semibold text-center">Estate / 4×4</div></label>
+            <label class="opt"><input type="radio" name="vehicle_size" value="Van"><div class="opt-body px-3 py-3 text-sm font-semibold text-center">Van</div></label>
+          </div>
+          <p id="sizeError" class="hidden text-sm text-red-600 mt-2">Please choose your vehicle size.</p>
+        </div>
+        <div>
+          <label class="text-xs uppercase tracking-widest text-brand-ink/60 font-semibold" for="reg">Registration <span class="normal-case text-brand-ink/40">(optional)</span></label>
+          <input id="reg" name="registration" type="text" class="field mt-2" placeholder="e.g. AB12 CDE" />
+        </div>
+        <div>
+          <label class="text-xs uppercase tracking-widest text-brand-ink/60 font-semibold" for="colour">Colour <span class="normal-case text-brand-ink/40">(optional)</span></label>
+          <input id="colour" name="colour" type="text" class="field mt-2" placeholder="e.g. Metallic black" />
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 3: CONDITION -->
+    <section class="b-card p-6 sm:p-8 shadow-soft">
+      <div class="flex items-center gap-4 mb-2">
+        <span class="step-num">3</span>
+        <h2 class="display text-2xl sm:text-3xl uppercase">Vehicle condition</h2>
+      </div>
+      <p class="text-brand-ink/60 text-sm mb-6 ml-[50px]">Be honest — this helps us bring the right products and quote accurately.</p>
+
+      <h3 class="display text-lg uppercase mb-3 text-brand-ink/80">Interior condition *</h3>
+      <div id="interiorGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-8"></div>
+
+      <h3 class="display text-lg uppercase mb-3 text-brand-ink/80">Exterior condition *</h3>
+      <div id="exteriorGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3"></div>
+      <p id="conditionError" class="hidden text-sm text-red-600 mt-3">Please select an interior and exterior condition.</p>
+    </section>
+
+    <!-- ESTIMATED PRICE -->
+    <section class="b-card p-6 sm:p-8 shadow-soft" style="background:#0A0F1F;color:#fff;">
+      <div class="flex items-center gap-4 mb-2">
+        <span class="step-num" style="background:#1E5BFF;">£</span>
+        <h2 class="display text-2xl sm:text-3xl uppercase">Your estimate</h2>
+      </div>
+      <p class="text-white/55 text-sm mb-5 ml-[50px]">Updates as you choose your package, add-ons and vehicle size. This is a guide price — we confirm the final total when we accept your booking.</p>
+      <div id="estimateBody" class="ml-[50px] text-white/80 text-sm">Choose a package and your vehicle size above to see your estimate.</div>
+    </section>
+
+    <!-- STEP 4: LOCATION & ACCESS -->
+    <section class="b-card p-6 sm:p-8 shadow-soft">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="step-num">4</span>
+        <h2 class="display text-2xl sm:text-3xl uppercase">Location &amp; access</h2>
+      </div>
+
+      <span class="text-xs uppercase tracking-widest text-brand-ink/60 font-semibold">How would you like the service? *</span>
+      <div class="grid sm:grid-cols-2 gap-3 mt-2 mb-6">
+        <label class="opt"><input type="radio" name="service_mode" value="Mobile — come to me" required>
+          <div class="opt-body px-4 py-3.5">
+            <div class="font-semibold text-sm">Mobile — come to me</div>
+            <div class="text-brand-ink/55 text-xs mt-0.5">We travel to your home or work and detail on site.</div>
+          </div>
+        </label>
+        <label class="opt"><input type="radio" name="service_mode" value="Drop-off — I'll bring the car">
+          <div class="opt-body px-4 py-3.5">
+            <div class="font-semibold text-sm">Drop-off — I'll bring the car</div>
+            <div class="text-brand-ink/55 text-xs mt-0.5">Bring your vehicle to us — water &amp; power sorted our end.</div>
+          </div>
+        </label>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-5">
+        <div class="sm:col-span-2">
+          <label class="text-xs uppercase tracking-widest text-brand-ink/60 font-semibold" for="location"><span id="locationLabel">Where is the vehicle?</span> *</label>
+          <input id="location" name="location" type="text" required class="field mt-2" placeholder="Address or postcode" />
+        </div>
+        <div id="mobileAccess" class="sm:col-span-2 grid sm:grid-cols-2 gap-5">
+          <div>
+            <span class="text-xs uppercase tracking-widest text-brand-ink/60 font-semibold">Water access on site? *</span>
+            <div class="flex gap-3 mt-2">
+              <label class="opt flex-1"><input type="radio" name="water_access" value="Yes"><div class="opt-body px-4 py-3 text-sm font-semibold">Yes</div></label>
+              <label class="opt flex-1"><input type="radio" name="water_access" value="No"><div class="opt-body px-4 py-3 text-sm font-semibold">No</div></label>
+            </div>
+          </div>
+          <div>
+            <span class="text-xs uppercase tracking-widest text-brand-ink/60 font-semibold">Electricity access on site? *</span>
+            <div class="flex gap-3 mt-2">
+              <label class="opt flex-1"><input type="radio" name="electricity_access" value="Yes"><div class="opt-body px-4 py-3 text-sm font-semibold">Yes</div></label>
+              <label class="opt flex-1"><input type="radio" name="electricity_access" value="No"><div class="opt-body px-4 py-3 text-sm font-semibold">No</div></label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p id="modeError" class="hidden text-sm text-red-600 mt-3">Please choose mobile or drop-off.</p>
+      <p id="accessError" class="hidden text-sm text-red-600 mt-3">Please confirm water and electricity access.</p>
+    </section>
+
+    <!-- STEP 5: DATE & TIME -->
+    <section class="b-card p-6 sm:p-8 shadow-soft">
+      <div class="flex items-center gap-4 mb-2">
+        <span class="step-num">5</span>
+        <h2 class="display text-2xl sm:text-3xl uppercase">Preferred date &amp; time</h2>
+      </div>
+      <p class="text-brand-ink/60 text-sm mb-6 ml-[50px]">Available days are highlighted. Pick a day, then a time slot. This is a request — we'll confirm the final time with you.</p>
+
+      <div class="grid lg:grid-cols-2 gap-8">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <button type="button" id="calPrev" class="btn-ghost w-9 h-9 rounded-full inline-flex items-center justify-center" aria-label="Previous month">‹</button>
+            <div id="calMonth" class="display text-lg uppercase"></div>
+            <button type="button" id="calNext" class="btn-ghost w-9 h-9 rounded-full inline-flex items-center justify-center" aria-label="Next month">›</button>
+          </div>
+          <div class="grid grid-cols-7 gap-1.5 text-center text-[11px] uppercase tracking-wider text-brand-ink/45 mb-1.5">
+            <div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div>
+          </div>
+          <div id="calGrid" class="grid grid-cols-7 gap-1.5"></div>
+          <div class="flex items-center gap-4 mt-4 text-xs text-brand-ink/55">
+            <span class="inline-flex items-center gap-1.5"><span class="inline-block w-3 h-3 rounded" style="background:rgba(30,91,255,0.18)"></span> Available</span>
+            <span class="inline-flex items-center gap-1.5"><span class="inline-block w-3 h-3 rounded bg-brand-blue"></span> Selected</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="text-xs uppercase tracking-widest text-brand-ink/60 font-semibold mb-3">Time slot</div>
+          <div id="slotsWrap" class="text-brand-ink/50 text-sm">Select a day first.</div>
+          <div id="selectedSummary" class="hidden mt-6 p-4 rounded-xl bg-brand-blue/5 border border-brand-blue/20 text-sm">
+            <span class="font-semibold">Selected:</span> <span id="selectedText"></span>
+          </div>
+        </div>
+      </div>
+      <input type="hidden" name="preferred_date" id="preferred_date" />
+      <input type="hidden" name="preferred_time" id="preferred_time" />
+      <p id="dateError" class="hidden text-sm text-red-600 mt-3">Please choose a preferred date and time.</p>
+    </section>
+
+    <!-- STEP 6: YOUR DETAILS -->
+    <section class="b-card p-6 sm:p-8 shadow-soft">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="step-num">6</span>
+        <h2 class="display text-2xl sm:text-3xl uppercase">Your details</h2>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-5">
+        <div class="sm:col-span-2">
+          <label class="text-xs uppercase tracking-widest text-brand-ink/60 font-semibold" for="name">Full name *</label>
+          <input id="name" name="name" type="text" required class="field mt-2" placeholder="Your full name" />
+        </div>
+        <div>
+          <label class="text-xs uppercase tracking-widest text-brand-ink/60 font-semibold" for="phone">Phone number *</label>
+          <input id="phone" name="phone" type="tel" required class="field mt-2" placeholder="07000 000000" />
+        </div>
+        <div>
+          <label class="text-xs uppercase tracking-widest text-brand-ink/60 font-semibold" for="email">Email *</label>
+          <input id="email" name="email" type="email" required class="field mt-2" placeholder="you@email.com" />
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 7: PHOTOS (optional) -->
+    <section class="b-card p-6 sm:p-8 shadow-soft">
+      <div class="flex items-center gap-4 mb-2">
+        <span class="step-num">7</span>
+        <h2 class="display text-2xl sm:text-3xl uppercase">Photos <span class="text-brand-ink/40 text-lg align-middle normal-case font-sans">(optional)</span></h2>
+      </div>
+      <p class="text-brand-ink/60 text-sm mb-5 ml-[50px]">For the most accurate quote, please upload up to 5 photos showing the interior and exterior condition of your vehicle.</p>
+      <label class="dropzone block" for="photos">
+        <svg class="mx-auto mb-3" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#1E5BFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <div class="font-semibold">Tap to add photos</div>
+        <div class="text-brand-ink/50 text-sm mt-1">JPG or PNG · up to 5 images</div>
+        <input id="photos" name="photos" type="file" accept="image/*" multiple class="hidden" />
+      </label>
+      <div id="thumbs" class="grid grid-cols-3 sm:grid-cols-5 gap-3 mt-4"></div>
+      <p id="photoError" class="hidden text-sm text-red-600 mt-2"></p>
+    </section>
+
+    <!-- STEP 8: NOTES -->
+    <section class="b-card p-6 sm:p-8 shadow-soft">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="step-num">8</span>
+        <h2 class="display text-2xl sm:text-3xl uppercase">Anything else? <span class="text-brand-ink/40 text-lg align-middle normal-case font-sans">(optional)</span></h2>
+      </div>
+      <textarea id="notes" name="notes" rows="4" class="field" placeholder="Specific concerns, stains, pet hair, deadlines, parking notes…"></textarea>
+    </section>
+
+    <!-- SUBMIT -->
+    <div class="b-card p-6 sm:p-8 shadow-soft">
+      <p id="submitTotal" class="text-center display uppercase text-xl mb-4">Estimated total: £0.00</p>
+      <button type="submit" id="submitBtn" class="btn-primary w-full inline-flex items-center justify-center gap-2 px-7 py-5 rounded-full text-base font-semibold uppercase tracking-wider">
+        <span id="submitLabel">Request Booking</span>
+        <span class="bolt" style="background:#fff;"></span>
+      </button>
+      <p class="text-center text-brand-ink/50 text-xs mt-4">We'll confirm your slot and send a tailored quote. No payment taken online.</p>
+      <p id="formError" class="hidden text-center text-sm text-red-600 mt-3"></p>
+    </div>
+  </form>
+
+  <!-- SUCCESS PANEL -->
+  <div id="successPanel" class="hidden b-card p-8 sm:p-12 shadow-card text-center">
+    <div class="w-16 h-16 rounded-full bg-brand-blue/10 mx-auto flex items-center justify-center mb-6">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#1E5BFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+    </div>
+    <h2 class="display text-3xl sm:text-4xl uppercase">Booking requested!</h2>
+    <p class="text-brand-ink/70 mt-4 max-w-lg mx-auto leading-relaxed">
+      Thanks — we've received your request and will be in touch shortly to confirm your slot and quote. A copy has been sent to our team.
+    </p>
+    <p id="photoNote" class="hidden mt-4 max-w-lg mx-auto text-sm font-semibold text-brand-blue bg-brand-blue/10 rounded-xl px-4 py-3"></p>
+    <div class="flex flex-col sm:flex-row gap-3 justify-center mt-8">
+      <a id="gcalLink" href="#" target="_blank" rel="noopener" class="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-sm font-semibold">
+        Add to Google Calendar
+      </a>
+      <a id="waConfirm" href="#" target="_blank" rel="noopener" class="btn-primary btn-wa inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-sm font-semibold">
+        Send us a WhatsApp
+      </a>
+      <a href="index.html" class="btn-ghost inline-flex items-center justify-center px-6 py-3.5 rounded-full text-sm font-semibold">Back to site</a>
+    </div>
+  </div>
+</main>
+
+<!-- ============ CONTACT STRIP ============ -->
+<section class="bg-brand-ink text-white">
+  <div class="max-w-5xl mx-auto px-5 sm:px-8 py-12 grid sm:grid-cols-3 gap-6 text-center sm:text-left">
+    <a href="tel:+447709519480" class="flex items-center gap-3 justify-center sm:justify-start nav-link">
+      <span class="w-10 h-10 rounded-xl bg-brand-blue/15 flex items-center justify-center shrink-0">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E5BFF" stroke-width="2"><path d="M22 16.92V20a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3.09a2 2 0 012 1.72c.13.96.37 1.9.72 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.38a2 2 0 012.11-.45c.91.35 1.85.59 2.81.72a2 2 0 011.72 2.12z"/></svg>
+      </span>
+      <span><span class="block text-xs uppercase tracking-widest text-white/50">Call</span><span class="display uppercase text-lg">07709 519480</span></span>
+    </a>
+    <a href="https://wa.me/447709519480" target="_blank" rel="noopener" class="flex items-center gap-3 justify-center sm:justify-start nav-link">
+      <span class="w-10 h-10 rounded-xl bg-brand-blue/15 flex items-center justify-center shrink-0">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#1E5BFF"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24z"/></svg>
+      </span>
+      <span><span class="block text-xs uppercase tracking-widest text-white/50">WhatsApp</span><span class="display uppercase text-lg">07709 519480</span></span>
+    </a>
+    <a href="mailto:charged_detailing@outlook.com" class="flex items-center gap-3 justify-center sm:justify-start nav-link">
+      <span class="w-10 h-10 rounded-xl bg-brand-blue/15 flex items-center justify-center shrink-0">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E5BFF" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </span>
+      <span><span class="block text-xs uppercase tracking-widest text-white/50">Email</span><span class="display uppercase text-sm sm:text-base">charged_detailing@outlook.com</span></span>
+    </a>
+  </div>
+</section>
+
+<footer class="bg-brand-ink text-white border-t border-white/10">
+  <div class="max-w-5xl mx-auto px-5 sm:px-8 py-8 flex flex-col sm:flex-row gap-5 sm:items-center sm:justify-between">
+    <div class="text-white/50 text-xs">© <span id="year"></span> Charged Professional Detailing. All rights reserved.</div>
+    <div class="flex items-center gap-3">
+      <a href="https://www.instagram.com/charged_detailing?igsh=bWczOXloY3dkN21r" target="_blank" rel="noopener" aria-label="Follow us on Instagram" class="w-10 h-10 rounded-full bg-white/10 hover:bg-brand-blue flex items-center justify-center text-white transition-colors">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 01-1.38-.9 3.7 3.7 0 01-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.21 15.58 2.2 15.2 2.2 12s0-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.21 8.8 2.2 12 2.2zm0 1.62c-3.15 0-3.52.01-4.76.07-.97.04-1.5.21-1.85.34-.46.18-.8.4-1.15.74-.34.35-.56.69-.74 1.15-.13.35-.3.88-.34 1.85-.06 1.24-.07 1.61-.07 4.76s.01 3.52.07 4.76c.04.97.21 1.5.34 1.85.18.46.4.8.74 1.15.35.34.69.56 1.15.74.35.13.88.3 1.85.34 1.24.06 1.61.07 4.76.07s3.52-.01 4.76-.07c.97-.04 1.5-.21 1.85-.34.46-.18.8-.4 1.15-.74.34-.35.56-.69.74-1.15.13-.35.3-.88.34-1.85.06-1.24.07-1.61.07-4.76s-.01-3.52-.07-4.76c-.04-.97-.21-1.5-.34-1.85a3.1 3.1 0 00-.74-1.15 3.1 3.1 0 00-1.15-.74c-.35-.13-.88-.3-1.85-.34-1.24-.06-1.61-.07-4.76-.07zm0 2.76a5.42 5.42 0 110 10.84 5.42 5.42 0 010-10.84zm0 1.62a3.8 3.8 0 100 7.6 3.8 3.8 0 000-7.6zm5.6-.29a1.27 1.27 0 11-2.54 0 1.27 1.27 0 012.54 0z"/></svg>
+      </a>
+      <a href="https://www.facebook.com/share/1DtHmkfTw7/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Follow us on Facebook" class="w-10 h-10 rounded-full bg-white/10 hover:bg-brand-blue flex items-center justify-center text-white transition-colors">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.52 1.49-3.91 3.78-3.91 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.78-1.63 1.57v1.89h2.78l-.44 2.91h-2.34V22c4.78-.76 8.44-4.92 8.44-9.94z"/></svg>
+      </a>
+      <span class="text-white/50 text-xs flex items-center gap-2 ml-1">Your ride <span class="bolt"></span> our priority.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating quick-contact buttons -->
+<div class="fab-wrap">
+  <a href="https://wa.me/447709519480" target="_blank" rel="noopener" class="fab btn-wa" aria-label="WhatsApp us">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="#062b15"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-.607z"/></svg>
+  </a>
+  <a href="tel:+447709519480" class="fab btn-primary" aria-label="Call us">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92V20a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3.09a2 2 0 012 1.72c.13.96.37 1.9.72 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.38a2 2 0 012.11-.45c.91.35 1.85.59 2.81.72a2 2 0 011.72 2.12z"/></svg>
+  </a>
+</div>
+
+<script>
+/* =====================================================================
+   CHARGED PROFESSIONAL — BOOKING PAGE CONFIG
+   ===================================================================== */
+
+/* ---------------------------------------------------------------------
+   1) SET YOUR ACCESS KEY  (so bookings email you)
+   ---------------------------------------------------------------------
+   Get a FREE key in 60 seconds:
+     1. Go to https://web3forms.com
+     2. Enter your email: charged_detailing@outlook.com
+     3. Copy the access key they send you
+     4. Paste it between the quotes below.
+   Until this is set, the form runs in "preview" mode and won't send.        */
+const WEB3FORMS_ACCESS_KEY = "4be9c48f-3991-4314-8df4-110a779bc06e";
+
+/* ---------------------------------------------------------------------
+   CLOUDINARY (free) — so customer photos arrive as links in your email
+   ---------------------------------------------------------------------
+   Free setup (~2 mins):
+     1. Sign up at https://cloudinary.com (free).
+     2. On your dashboard, copy your "Cloud name" → paste below.
+     3. Go to Settings (gear) → Upload → Add upload preset →
+        set "Signing Mode" to UNSIGNED → Save → copy its name → paste below.
+   Until both are filled in, photos fall back to the WhatsApp method.       */
+const CLOUDINARY_CLOUD_NAME   = "";   // e.g. "dabc1xyz"
+const CLOUDINARY_UPLOAD_PRESET = "";  // e.g. "charged_bookings"
+const CLOUDINARY_READY = !!(CLOUDINARY_CLOUD_NAME && CLOUDINARY_UPLOAD_PRESET);
+
+/* ---------------------------------------------------------------------
+   2) YOUR AVAILABILITY  (set up for your 2-week rotating shift pattern)
+   ---------------------------------------------------------------------
+   Your slots rotate every week between a DAYS week and a NIGHTS week.
+   Fridays, Saturdays and Sundays are the same in both weeks.
+
+   • rotationAnchorMonday — a Monday that is a DAYS week. Everything else
+     is worked out from this automatically: Mon 1 Jun 2026 is a days week,
+     so 8 Jun is nights, 15 Jun days, 22 Jun nights, and so on forever.
+     You should NOT need to change this unless your real shift rotation
+     ever slips out of sync (e.g. after annual leave). If that happens,
+     set it to the date of any Monday you KNOW is a days week.
+   • blockedDates — specific days you are OFF (holidays / already booked),
+     format "YYYY-MM-DD", each in quotes with a comma after.
+   • Times are 24-hour ("HH:MM"). Days are 0=Sun,1=Mon,2=Tue ... 6=Sat.
+     The page shows customers friendly times (9am, 1pm, 5pm…).               */
+const AVAILABILITY = {
+  leadDays:    1,                       // earliest booking = tomorrow
+  monthsAhead: 3,                       // how far ahead customers can book
+  rotationAnchorMonday: "2026-06-01",   // this Monday is a DAYS week
+  blockedDates: [                       // days off — e.g. "2026-12-25",
+  ],
+  schedules: {
+    // DAYS week — your 9–5 is 06:00–16:00, so evenings are free Mon–Thu
+    days: {
+      1: ["17:00"],            // Monday
+      2: ["17:00"],            // Tuesday
+      3: ["17:00"],            // Wednesday
+      4: ["17:00"],            // Thursday
+      5: ["09:00", "13:00"],   // Friday
+      6: ["09:00", "13:00"],   // Saturday
+      0: ["09:00", "13:00"],   // Sunday
+    },
+    // NIGHTS week — your 9–5 is 16:00–02:00, so mornings are free Mon–Thu
+    nights: {
+      1: ["09:00"],            // Monday
+      2: ["09:00"],            // Tuesday
+      3: ["09:00"],            // Wednesday
+      4: ["09:00"],            // Thursday
+      5: ["09:00", "13:00"],   // Friday
+      6: ["09:00", "13:00"],   // Saturday
+      0: ["09:00", "13:00"],   // Sunday
+    },
+  },
+};
+
+/* Services offered (edit freely) */
+const SERVICES = [
+  "Mini Detail — from £30",
+  "Full Detail — from £50",
+  "Stage 1 Protection Detail — from £150",
+  "Stage 2 Correction Detail — from £220",
+  "Stage 3 Enhancement Detail — from £300",
+  "New Car Detail — from £500",
+  "Maintenance Plan — enquire",
+  "Fleet & Commercial — enquire",
+  "Pre-Sale Prep — enquire",
+  "Not sure — please advise",
+];
+
+/* Add-ons (cheapest → most expensive) */
+const ADDONS = [
+  "Screen Wash Top Up — £10",
+  "Child Car Seat Clean — £15",
+  "Engine Bay Detail — £20",
+  "Interior Wet Vac — £20",
+  "Interior Hydrophobic Protection — £20",
+  "Rust Removal — £20",
+  "Windshield / Glass Coating — £20",
+  "Head Liner Detail — £20",
+  "Trim Restoration — £20",
+  "Pet Hair Removal — £20",
+  "Mould Removal — £30",
+  "Exterior Chrome Polish — £30",
+  "Alloy Removal & Deep Clean — £40",
+  "Emblem Removal / Replacement — £40",
+  "Glass Machine Polish — £50",
+  "Seat Removal & Deep Clean — £50",
+  "Leather Coating — £50",
+  "Headlight Restoration — £60",
+  "Interior Machine Polish — £60",
+  "Alloy Polish & Protection — £100",
+  "Brake Calliper Respray — £100",
+];
+
+/* Condition definitions (exactly as supplied) */
+const INTERIOR_CONDITIONS = [
+  { emoji: "🟢", label: "Excellent", points: ["Vehicle cleaned regularly", "No stains", "No pet hair", "Minimal dust", "No food debris", "Mainly maintenance cleaning"] },
+  { emoji: "🟡", label: "Good", points: ["Light dust throughout", "Minor marks on plastics", "Small debris in carpets", "Some fingerprints / light soiling", "No major stains"] },
+  { emoji: "🟠", label: "Fair", points: ["Noticeable dirt build-up", "Food crumbs present", "Dirty floor mats", "Marks on plastics and trim", "Light staining on seats/carpets", "Requires a deep clean"] },
+  { emoji: "🔴", label: "Poor", points: ["Heavy dirt throughout", "Multiple stains", "Significant debris in carpets & seat rails", "Dirty door pockets & storage", "Needs extensive cleaning & extraction"] },
+  { emoji: "⚫", label: "Extreme", points: ["Excessive dirt & contamination", "Heavy staining", "Pet hair throughout", "Mould, bodily fluids or strong odours", "Specialist assessment before booking"] },
+];
+const EXTERIOR_CONDITIONS = [
+  { emoji: "🟢", label: "Excellent", points: ["Washed regularly", "Light dust or road film only"] },
+  { emoji: "🟡", label: "Good", points: ["General road grime", "Light contamination", "Minor bug splatter"] },
+  { emoji: "🟠", label: "Fair", points: ["Noticeable dirt build-up", "Brake dust accumulation", "Tar spots or tree sap present"] },
+  { emoji: "🔴", label: "Poor", points: ["Heavy contamination", "Significant brake dust", "Green algae around trims & seals", "Long period since last wash"] },
+  { emoji: "⚫", label: "Extreme", points: ["Excessive contamination", "Moss, algae, heavy staining", "Neglected condition", "May require multiple stages"] },
+];
+
+/* =====================================================================
+   RENDER: services + condition cards
+   ===================================================================== */
+function esc(s){ return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+document.getElementById('servicesGrid').innerHTML = SERVICES.map((s, i) => `
+  <label class="opt">
+    <input type="checkbox" name="services" value="${esc(s)}">
+    <div class="opt-body flex items-center gap-3 px-4 py-3.5">
+      <span class="w-5 h-5 rounded-md border-2 border-brand-blue/40 flex items-center justify-center shrink-0">
+        <svg class="tick" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1E5BFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      </span>
+      <span class="font-semibold text-sm">${esc(s)}</span>
+    </div>
+  </label>`).join('');
+
+document.getElementById('addonsGrid').innerHTML = ADDONS.map(a => `
+  <label class="flex items-center gap-3 py-2.5 border-b border-black/5 cursor-pointer group">
+    <input type="checkbox" name="addons" value="${esc(a)}" class="peer sr-only">
+    <span class="w-5 h-5 rounded-md border-2 border-brand-blue/40 flex items-center justify-center shrink-0 peer-checked:bg-brand-blue peer-checked:border-brand-blue transition-colors">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+    </span>
+    <span class="text-sm text-brand-ink/80 group-hover:text-brand-ink">${esc(a)}</span>
+  </label>`).join('');
+
+function conditionCard(group, c){
+  return `
+  <label class="opt h-full">
+    <input type="radio" name="${group}" value="${esc(c.label)}">
+    <div class="opt-body p-4 h-full">
+      <div class="flex items-center justify-between mb-2">
+        <div class="flex items-center gap-2"><span class="text-lg">${c.emoji}</span><span class="display uppercase text-base">${esc(c.label)}</span></div>
+        <svg class="tick" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E5BFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      </div>
+      <ul class="text-brand-ink/60 text-[12.5px] leading-snug space-y-1 list-disc pl-4">
+        ${c.points.map(p => `<li>${esc(p)}</li>`).join('')}
+      </ul>
+    </div>
+  </label>`;
+}
+document.getElementById('interiorGrid').innerHTML = INTERIOR_CONDITIONS.map(c => conditionCard('interior_condition', c)).join('');
+document.getElementById('exteriorGrid').innerHTML = EXTERIOR_CONDITIONS.map(c => conditionCard('exterior_condition', c)).join('');
+
+/* =====================================================================
+   CALENDAR
+   ===================================================================== */
+const calGrid = document.getElementById('calGrid');
+const calMonth = document.getElementById('calMonth');
+const slotsWrap = document.getElementById('slotsWrap');
+const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+let viewDate = new Date(); viewDate.setDate(1);
+let selectedDate = null;   // 'YYYY-MM-DD'
+let selectedTime = null;
+
+const today = new Date(); today.setHours(0,0,0,0);
+const minDate = new Date(today); minDate.setDate(minDate.getDate() + AVAILABILITY.leadDays);
+const maxDate = new Date(today); maxDate.setMonth(maxDate.getMonth() + AVAILABILITY.monthsAhead);
+
+function fmt(d){ return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); }
+
+// Monday of the week containing d
+function mondayOf(d){
+  const x = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  x.setDate(x.getDate() - ((x.getDay() + 6) % 7));
+  return x;
+}
+// 'days' or 'nights' for the week containing d (anchor week = days)
+function weekTypeFor(d){
+  const [ay, am, ad] = AVAILABILITY.rotationAnchorMonday.split('-').map(Number);
+  const anchor = new Date(ay, am - 1, ad);
+  const weeks = Math.round((mondayOf(d) - anchor) / 604800000); // ms in a week
+  return ((((weeks % 2) + 2) % 2) === 0) ? 'days' : 'nights';
+}
+// the time slots offered on a given date (may be empty)
+function slotsFor(d){
+  return AVAILABILITY.schedules[weekTypeFor(d)][d.getDay()] || [];
+}
+function isAvailable(d){
+  if (d < minDate || d > maxDate) return false;
+  if (AVAILABILITY.blockedDates.includes(fmt(d))) return false;
+  return slotsFor(d).length > 0;
+}
+
+function renderCalendar(){
+  calMonth.textContent = MONTHS[viewDate.getMonth()] + ' ' + viewDate.getFullYear();
+  calGrid.innerHTML = '';
+  const firstDay = new Date(viewDate.getFullYear(), viewDate.getMonth(), 1);
+  // Monday-first offset
+  let startOffset = (firstDay.getDay() + 6) % 7;
+  for (let i = 0; i < startOffset; i++){
+    const e = document.createElement('div'); e.className = 'cal-day empty'; calGrid.appendChild(e);
+  }
+  const daysInMonth = new Date(viewDate.getFullYear(), viewDate.getMonth()+1, 0).getDate();
+  for (let day = 1; day <= daysInMonth; day++){
+    const d = new Date(viewDate.getFullYear(), viewDate.getMonth(), day);
+    const cell = document.createElement('div');
+    cell.textContent = day;
+    const key = fmt(d);
+    if (isAvailable(d)){
+      cell.className = 'cal-day available' + (key === selectedDate ? ' selected' : '');
+      cell.setAttribute('role','button'); cell.tabIndex = 0;
+      const pick = () => selectDate(key, cell);
+      cell.addEventListener('click', pick);
+      cell.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' '){ e.preventDefault(); pick(); } });
+    } else {
+      cell.className = 'cal-day unavailable';
+    }
+    calGrid.appendChild(cell);
+  }
+}
+
+function selectDate(key, cell){
+  selectedDate = key; selectedTime = null;
+  document.getElementById('preferred_date').value = key;
+  document.getElementById('preferred_time').value = '';
+  calGrid.querySelectorAll('.cal-day').forEach(c => c.classList.remove('selected'));
+  cell.classList.add('selected');
+  renderSlots();
+  updateSummary();
+}
+
+function renderSlots(){
+  if (!selectedDate){ slotsWrap.innerHTML = 'Select a day first.'; return; }
+  const [sy, sm, sd] = selectedDate.split('-').map(Number);
+  const slots = slotsFor(new Date(sy, sm - 1, sd));
+  slotsWrap.innerHTML = '<div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5"></div>';
+  const wrap = slotsWrap.firstChild;
+  slots.forEach(t => {
+    const b = document.createElement('div');
+    b.className = 'slot' + (t === selectedTime ? ' selected' : '');
+    b.textContent = to12h(t);
+    b.setAttribute('role','button'); b.tabIndex = 0;
+    const pick = () => {
+      selectedTime = t;
+      document.getElementById('preferred_time').value = t;
+      wrap.querySelectorAll('.slot').forEach(s => s.classList.remove('selected'));
+      b.classList.add('selected');
+      updateSummary();
+    };
+    b.addEventListener('click', pick);
+    b.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' '){ e.preventDefault(); pick(); } });
+    wrap.appendChild(b);
+  });
+}
+
+function to12h(t){
+  const [h, m] = t.split(':').map(Number);
+  const ap = h >= 12 ? 'pm' : 'am';
+  const hr = ((h + 11) % 12) + 1;
+  return hr + (m ? ':' + String(m).padStart(2,'0') : '') + ap;
+}
+function prettyDate(key){
+  const [y,mo,d] = key.split('-').map(Number);
+  const dt = new Date(y, mo-1, d);
+  return dt.toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long' });
+}
+function updateSummary(){
+  const box = document.getElementById('selectedSummary');
+  if (selectedDate && selectedTime){
+    document.getElementById('selectedText').textContent = prettyDate(selectedDate) + ' at ' + to12h(selectedTime);
+    box.classList.remove('hidden');
+  } else { box.classList.add('hidden'); }
+}
+
+document.getElementById('calPrev').addEventListener('click', () => {
+  const prev = new Date(viewDate); prev.setMonth(prev.getMonth()-1);
+  if (prev.getFullYear() === today.getFullYear() && prev.getMonth() < today.getMonth()) return;
+  if (prev < new Date(today.getFullYear(), today.getMonth(), 1)) return;
+  viewDate = prev; renderCalendar();
+});
+document.getElementById('calNext').addEventListener('click', () => {
+  const next = new Date(viewDate); next.setMonth(next.getMonth()+1);
+  if (next > maxDate) return;
+  viewDate = next; renderCalendar();
+});
+renderCalendar();
+
+/* =====================================================================
+   PHOTOS (up to 5)
+   ===================================================================== */
+const MAX_PHOTOS = 5;
+const photoInput = document.getElementById('photos');
+const thumbs = document.getElementById('thumbs');
+const photoError = document.getElementById('photoError');
+let selectedFiles = [];
+
+photoInput.addEventListener('change', () => {
+  photoError.classList.add('hidden');
+  const incoming = Array.from(photoInput.files);
+  for (const f of incoming){
+    if (selectedFiles.length >= MAX_PHOTOS){
+      photoError.textContent = 'You can attach up to ' + MAX_PHOTOS + ' photos.';
+      photoError.classList.remove('hidden');
+      break;
+    }
+    if (!f.type.startsWith('image/')) continue;
+    selectedFiles.push(f);
+  }
+  syncInputFiles();
+  renderThumbs();
+});
+
+function syncInputFiles(){
+  const dt = new DataTransfer();
+  selectedFiles.forEach(f => dt.items.add(f));
+  photoInput.files = dt.files;
+}
+function renderThumbs(){
+  thumbs.innerHTML = '';
+  selectedFiles.forEach((f, idx) => {
+    const url = URL.createObjectURL(f);
+    const wrap = document.createElement('div');
+    wrap.className = 'relative rounded-xl overflow-hidden aspect-square bg-brand-ink/5';
+    wrap.innerHTML = `<img src="${url}" class="w-full h-full object-cover" alt="">
+      <button type="button" class="absolute top-1 right-1 w-6 h-6 rounded-full bg-black/60 text-white text-sm leading-none flex items-center justify-center" aria-label="Remove photo">×</button>`;
+    wrap.querySelector('button').addEventListener('click', () => {
+      selectedFiles.splice(idx, 1); syncInputFiles(); renderThumbs();
+      photoError.classList.add('hidden');
+    });
+    thumbs.appendChild(wrap);
+  });
+}
+
+// Resize + compress an image so attachments stay small enough to email.
+function compressImage(file, maxDim = 1500, quality = 0.7){
+  return new Promise((resolve) => {
+    if (!file.type || !file.type.startsWith('image/')) { resolve(file); return; }
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      let w = img.naturalWidth, h = img.naturalHeight;
+      if (w > h && w > maxDim){ h = Math.round(h * maxDim / w); w = maxDim; }
+      else if (h >= w && h > maxDim){ w = Math.round(w * maxDim / h); h = maxDim; }
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      canvas.toBlob(
+        blob => resolve(blob && blob.size < file.size ? blob : file),
+        'image/jpeg', quality
+      );
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); resolve(file); };
+    img.src = url;
+  });
+}
+
+/* =====================================================================
+   VALIDATION + SUBMIT
+   ===================================================================== */
+const form = document.getElementById('bookingForm');
+if (!WEB3FORMS_ACCESS_KEY) document.getElementById('setupNotice').classList.remove('hidden');
+
+function showErr(id, show){ document.getElementById(id).classList.toggle('hidden', !show); }
+
+/* ---- Live price estimate ---- */
+const PACKAGE_PRICES = {
+  "Mini Detail — from £30":                [30, 40, 50, 80],
+  "Full Detail — from £50":                [50, 60, 70, 90],
+  "Stage 1 Protection Detail — from £150": [150,180,220,250],
+  "Stage 2 Correction Detail — from £220": [220,250,270,290],
+  "Stage 3 Enhancement Detail — from £300":[300,350,400,450],
+  "New Car Detail — from £500":            [500,550,600,650],
+};
+const SIZE_INDEX = { "Hatchback":0, "Saloon":1, "Estate / 4×4":2, "Van":3 };
+const shortName = v => v.replace(/\s—.*/, '');
+const money = n => '£' + n.toFixed(2);
+
+function computeEstimate(){
+  const sizeR = form.querySelector('input[name="vehicle_size"]:checked');
+  const size = sizeR ? sizeR.value : null;
+  const sIdx = size != null ? SIZE_INDEX[size] : null;
+  const lines = []; let total = 0; let needQuote = false; let needSize = false;
+  form.querySelectorAll('input[name="services"]:checked').forEach(c => {
+    if (PACKAGE_PRICES[c.value]){
+      if (sIdx == null){ needSize = true; lines.push([shortName(c.value), null]); }
+      else { const p = PACKAGE_PRICES[c.value][sIdx]; total += p; lines.push([shortName(c.value), p]); }
+    } else { needQuote = true; lines.push([shortName(c.value), 'POA']); }
+  });
+  form.querySelectorAll('input[name="addons"]:checked').forEach(c => {
+    const m = c.value.match(/£(\d+)/); const p = m ? parseInt(m[1],10) : 0;
+    total += p; lines.push([shortName(c.value), p]);
+  });
+  return { lines, total, needQuote, needSize, size };
+}
+
+function estimateText(){
+  const { total, needQuote, size } = computeEstimate();
+  return money(total) + (size ? ' (' + size + ')' : '') + (needQuote ? ' + items to quote' : '');
+}
+
+function updateEstimate(){
+  const el = document.getElementById('estimateBody');
+  if (!el) return;
+  const { lines, total, needQuote, needSize, size } = computeEstimate();
+  if (lines.length === 0){ el.innerHTML = 'Choose a package and your vehicle size above to see your estimate.'; }
+  else {
+    let h = '<div class="space-y-1.5">';
+    lines.forEach(([name, val]) => {
+      let right = val === null ? '<span class="text-white/50">choose size</span>'
+                : val === 'POA' ? '<span class="text-white/60">Quote on booking</span>'
+                : money(val);
+      h += '<div class="flex items-baseline justify-between gap-4"><span>' + name + '</span><span class="display text-brand-blue">' + right + '</span></div>';
+    });
+    h += '</div><div class="border-t border-white/15 mt-3 pt-3 flex items-baseline justify-between">' +
+         '<span class="display uppercase text-lg">Estimated total' + (size ? ' · ' + size : '') + '</span>' +
+         '<span class="display text-2xl text-brand-blue">' + money(total) + '</span></div>';
+    if (needSize)  h += '<p class="text-white/55 text-xs mt-2">Pick your vehicle size in step 2 to price your package.</p>';
+    if (needQuote) h += '<p class="text-white/55 text-xs mt-2">Some selections are priced on enquiry and aren\'t included in the total.</p>';
+    el.innerHTML = h;
+  }
+  const st = document.getElementById('submitTotal');
+  if (st) st.textContent = 'Estimated total: ' + estimateText();
+}
+
+/* ---- Mobile vs drop-off ---- */
+function applyServiceMode(){
+  const mode = form.querySelector('input[name="service_mode"]:checked');
+  const isDrop = mode && mode.value.indexOf('Drop-off') === 0;
+  document.getElementById('mobileAccess').classList.toggle('hidden', !!isDrop);
+  document.getElementById('locationLabel').textContent = isDrop ? 'Your address / postcode' : 'Where is the vehicle?';
+}
+
+form.addEventListener('change', (e) => {
+  if (e.target.name === 'services' || e.target.name === 'addons' || e.target.name === 'vehicle_size') updateEstimate();
+  if (e.target.name === 'service_mode') applyServiceMode();
+});
+updateEstimate();
+applyServiceMode();
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const formError = document.getElementById('formError');
+  formError.classList.add('hidden');
+
+  // Custom validations
+  const servicesChosen = form.querySelectorAll('input[name="services"]:checked').length > 0;
+  const sizeChosen = !!form.querySelector('input[name="vehicle_size"]:checked');
+  const interiorChosen = !!form.querySelector('input[name="interior_condition"]:checked');
+  const exteriorChosen = !!form.querySelector('input[name="exterior_condition"]:checked');
+  const modeR = form.querySelector('input[name="service_mode"]:checked');
+  const modeChosen = !!modeR;
+  const isDrop = modeR && modeR.value.indexOf('Drop-off') === 0;
+  const waterChosen = !!form.querySelector('input[name="water_access"]:checked');
+  const elecChosen = !!form.querySelector('input[name="electricity_access"]:checked');
+  const accessOk = isDrop ? true : (waterChosen && elecChosen);
+  const dateChosen = !!(selectedDate && selectedTime);
+
+  showErr('servicesError', !servicesChosen);
+  showErr('sizeError', !sizeChosen);
+  showErr('conditionError', !(interiorChosen && exteriorChosen));
+  showErr('modeError', !modeChosen);
+  showErr('accessError', !accessOk);
+  showErr('dateError', !dateChosen);
+
+  const nativeOk = form.checkValidity();
+  if (!nativeOk) form.reportValidity();
+
+  if (!servicesChosen || !sizeChosen || !interiorChosen || !exteriorChosen || !modeChosen || !accessOk || !dateChosen || !nativeOk){
+    const firstErr = form.querySelector('.text-red-600:not(.hidden), :invalid');
+    if (firstErr) firstErr.scrollIntoView({ behavior:'smooth', block:'center' });
+    return;
+  }
+
+  if (!WEB3FORMS_ACCESS_KEY){
+    formError.textContent = 'Form not connected yet — add your Web3Forms access key in booking.html to go live.';
+    formError.classList.remove('hidden');
+    return;
+  }
+
+  // Build submission
+  const btn = document.getElementById('submitBtn');
+  const label = document.getElementById('submitLabel');
+  btn.disabled = true; label.textContent = 'Sending…';
+
+  const services = Array.from(form.querySelectorAll('input[name="services"]:checked')).map(c => c.value);
+  const addons = Array.from(form.querySelectorAll('input[name="addons"]:checked')).map(c => c.value);
+
+  function buildData(){
+    const d = new FormData(form);
+    d.delete('photos'); // raw file input handled separately below
+    d.set('access_key', WEB3FORMS_ACCESS_KEY);
+    d.set('services', services.join(', '));
+    d.set('addons', addons.length ? addons.join(', ') : 'None');
+    d.set('vehicle_size', (form.querySelector('input[name="vehicle_size"]:checked') || {}).value || '');
+    d.set('service_mode', (modeR || {}).value || '');
+    d.set('estimated_total', estimateText());
+    d.set('preferred_slot', prettyDate(selectedDate) + ' at ' + to12h(selectedTime));
+    d.set('subject', 'New Booking — ' + (form.name.value || 'Customer') + ' (' + services.join(', ') + ')');
+    d.set('from_name', 'Charged Professional Booking');
+    return d;
+  }
+
+  // Upload one compressed photo to Cloudinary, return its public URL.
+  async function uploadToCloudinary(file){
+    const blob = await compressImage(file);
+    const fd = new FormData();
+    fd.append('file', blob);
+    fd.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+    const res = await fetch('https://api.cloudinary.com/v1_1/' + CLOUDINARY_CLOUD_NAME + '/image/upload', { method: 'POST', body: fd });
+    const j = await res.json();
+    if (!j.secure_url) throw new Error('Cloudinary upload failed');
+    return j.secure_url;
+  }
+
+  let photosDropped = false;
+  try {
+    // 1) Upload photos to Cloudinary (free image host) so they can be emailed as links.
+    let photoUrls = [];
+    if (selectedFiles.length && CLOUDINARY_READY){
+      label.textContent = 'Uploading photos…';
+      try {
+        for (const f of selectedFiles) photoUrls.push(await uploadToCloudinary(f));
+      } catch (_) { photoUrls = []; }   // if uploads fail, still send the booking
+    }
+
+    // 2) Send the booking to Web3Forms (links included; no attachments needed).
+    label.textContent = 'Sending…';
+    const data = buildData();
+    if (photoUrls.length){
+      data.set('photos', photoUrls.map((u, i) => 'Photo ' + (i + 1) + ': ' + u).join('\n'));
+    } else if (selectedFiles.length){
+      data.set('photos_note', selectedFiles.length + ' photo(s) added by the customer but not received — please request them via WhatsApp/email.');
+      photosDropped = true;
+    }
+    const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
+    const json = await res.json();
+    if (json.success){
+      onSuccess(services, addons, photosDropped);
+    } else {
+      throw new Error(json.message || 'Submit failed');
+    }
+  } catch (err) {
+    formError.textContent = 'Sorry, something went wrong sending your booking. Please call or WhatsApp us on 07709 519480.';
+    formError.classList.remove('hidden');
+    btn.disabled = false; label.textContent = 'Request Booking';
+  }
+});
+
+function onSuccess(services, addons, photosDropped){
+  addons = addons || [];
+  form.classList.add('hidden');
+  document.getElementById('setupNotice').classList.add('hidden');
+  const panel = document.getElementById('successPanel');
+  panel.classList.remove('hidden');
+
+  // Google Calendar link (2-hour default block)
+  const [y,mo,d] = selectedDate.split('-').map(Number);
+  const [hh,mm] = selectedTime.split(':').map(Number);
+  const start = new Date(y, mo-1, d, hh, mm);
+  const end = new Date(start.getTime() + 2*60*60*1000);
+  const z = n => String(n).padStart(2,'0');
+  const cal = dt => dt.getFullYear()+z(dt.getMonth()+1)+z(dt.getDate())+'T'+z(dt.getHours())+z(dt.getMinutes())+'00';
+  const title = encodeURIComponent('Detail — ' + (form.vehicle.value || 'Vehicle') + ' (' + (form.name.value || '') + ')');
+  const details = encodeURIComponent(
+    'Service: ' + services.join(', ') +
+    (addons.length ? '\nAdd-ons: ' + addons.join(', ') : '') +
+    '\nVehicle: ' + form.vehicle.value +
+    '\nName: ' + form.name.value +
+    '\nPhone: ' + form.phone.value +
+    '\nEmail: ' + form.email.value
+  );
+  const loc = encodeURIComponent(form.location.value || '');
+  document.getElementById('gcalLink').href =
+    'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + title +
+    '&dates=' + cal(start) + '/' + cal(end) + '&details=' + details + '&location=' + loc;
+
+  // Prefilled WhatsApp confirmation
+  const hadPhotos = selectedFiles.length > 0;
+  const waText = encodeURIComponent(
+    'Hi Charged Professional, I just booked online:\n' +
+    'Name: ' + form.name.value + '\n' +
+    'Vehicle: ' + form.vehicle.value + '\n' +
+    'Service: ' + services.join(', ') + '\n' +
+    (addons.length ? 'Add-ons: ' + addons.join(', ') + '\n' : '') +
+    'Preferred: ' + prettyDate(selectedDate) + ' at ' + to12h(selectedTime) +
+    (photosDropped ? '\n\nI also have ' + selectedFiles.length + ' photo(s) of my vehicle to send.' : '')
+  );
+  document.getElementById('waConfirm').href = 'https://wa.me/447709519480?text=' + waText;
+
+  // If photos couldn't be attached, nudge the customer to send them via WhatsApp.
+  const note = document.getElementById('photoNote');
+  if (note){
+    if (photosDropped && hadPhotos){
+      note.textContent = 'One more thing — tap “Send us a WhatsApp” below to send your ' + selectedFiles.length + ' photo(s). It opens a ready-made message; just attach your images.';
+      note.classList.remove('hidden');
+    } else {
+      note.classList.add('hidden');
+    }
+  }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

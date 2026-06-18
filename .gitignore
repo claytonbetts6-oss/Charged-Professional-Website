@@ -1,0 +1,7 @@
+# macOS
+.DS_Store
+
+# Working / source files not used by the live site
+Assets/*.pdf
+Assets/Screenshot*
+Assets/PHOTO-*.jpg

@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Charged Professional Detailing — Your Ride, Is Our Priority</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          brand: {
+            blue: '#1E5BFF',
+            blueDark: '#0E3BCC',
+            ink: '#0A0F1F',
+            paper: '#FFFFFF',
+            mist: '#F4F6FB',
+          },
+        },
+        fontFamily: {
+          display: ['Anton', 'sans-serif'],
+          sans: ['Inter', 'system-ui', 'sans-serif'],
+        },
+        boxShadow: {
+          card: '0 20px 60px -25px rgba(30, 91, 255, 0.35)',
+          soft: '0 10px 40px -20px rgba(10, 15, 31, 0.25)',
+        },
+      },
+    },
+  };
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', system-ui, sans-serif; color: #0A0F1F; background: #FFFFFF; }
+  .display { font-family: 'Anton', sans-serif; letter-spacing: -0.01em; }
+
+  /* Hero backdrop */
+  .hero {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: url('Assets/IMG_4337.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: blur(2px) brightness(0.5) saturate(1.1);
+    transform: scale(1.05);
+    z-index: -2;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(1200px 600px at 20% 10%, rgba(30,91,255,0.35), transparent 60%),
+      linear-gradient(180deg, rgba(10,15,31,0.55) 0%, rgba(10,15,31,0.75) 100%);
+    z-index: -1;
+  }
+
+  /* Bolt accent line */
+  .bolt-divider {
+    height: 4px;
+    width: 56px;
+    background: #1E5BFF;
+    border-radius: 2px;
+  }
+
+  /* Buttons */
+  .btn-primary {
+    background: #1E5BFF;
+    color: #FFFFFF;
+    transition: transform 200ms cubic-bezier(.2,.8,.2,1), background-color 200ms ease, box-shadow 200ms ease;
+    box-shadow: 0 12px 30px -10px rgba(30,91,255,0.6);
+  }
+  .btn-primary:hover { background: #0E3BCC; transform: translateY(-2px); }
+  .btn-primary:active { transform: translateY(0); }
+  .btn-primary:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 3px; }
+
+  .btn-ghost {
+    border: 1.5px solid rgba(255,255,255,0.55);
+    color: #FFFFFF;
+    background: transparent;
+    transition: transform 200ms cubic-bezier(.2,.8,.2,1), background-color 200ms ease, border-color 200ms ease;
+  }
+  .btn-ghost:hover { background: rgba(255,255,255,0.1); border-color: #FFFFFF; transform: translateY(-2px); }
+  .btn-ghost:focus-visible { outline: 2px solid #1E5BFF; outline-offset: 3px; }
+
+  /* Service card */
+  .service-card {
+    background: #FFFFFF;
+    border: 1px solid rgba(10,15,31,0.06);
+    transition: transform 250ms cubic-bezier(.2,.8,.2,1), box-shadow 250ms ease, border-color 250ms ease;
+  }
+  .service-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(30,91,255,0.3);
+    box-shadow: 0 24px 50px -25px rgba(30,91,255,0.35);
+  }
+
+  /* Gallery image hover */
+  .gallery-img {
+    overflow: hidden;
+    border-radius: 14px;
+    position: relative;
+  }
+  .gallery-img img {
+    transition: transform 600ms cubic-bezier(.2,.8,.2,1);
+  }
+  .gallery-img:hover img { transform: scale(1.05); }
+  .gallery-img::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 60%, rgba(10,15,31,0.55) 100%);
+    pointer-events: none;
+  }
+
+  /* Before / After tag */
+  .ba-tag {
+    position: absolute;
+    bottom: 14px;
+    left: 14px;
+    background: #1E5BFF;
+    color: #FFFFFF;
+    font-family: 'Anton', sans-serif;
+    letter-spacing: 0.08em;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+  }
+  .ba-tag.after { background: #FFFFFF; color: #0A0F1F; }
+
+  /* Lightning bolt */
+  .bolt {
+    display: inline-block;
+    width: 14px; height: 18px;
+    background: #1E5BFF;
+    clip-path: polygon(55% 0, 0 60%, 40% 60%, 25% 100%, 100% 35%, 55% 35%);
+    vertical-align: -3px;
+    margin: 0 4px;
+  }
+
+  /* Section headers */
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #1E5BFF;
+    font-weight: 600;
+  }
+
+  /* Marquee strip */
+  .marquee {
+    overflow: hidden;
+    background: #0A0F1F;
+    color: #FFFFFF;
+  }
+  .marquee-track {
+    display: flex;
+    gap: 48px;
+    padding: 18px 0;
+    white-space: nowrap;
+    animation: scroll 11s linear infinite;
+    will-change: transform;
+  }
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .marquee-item { font-family: 'Anton', sans-serif; letter-spacing: 0.06em; font-size: 22px; }
+
+  /* Form */
+  .field {
+    background: #FFFFFF;
+    border: 1.5px solid rgba(10,15,31,0.12);
+    border-radius: 10px;
+    padding: 14px 16px;
+    width: 100%;
+    transition: border-color 200ms ease, box-shadow 200ms ease;
+    font-size: 15px;
+  }
+  .field:focus { outline: none; border-color: #1E5BFF; box-shadow: 0 0 0 4px rgba(30,91,255,0.15); }
+
+  /* Mobile nav toggle */
+  .nav-link { transition: color 200ms ease; }
+  .nav-link:hover { color: #1E5BFF; }
+
+  /* Reveal */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 700ms ease, transform 700ms cubic-bezier(.2,.8,.2,1); }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body class="bg-white text-brand-ink antialiased">
+
+<!-- ============ NAV ============ -->
+<header class="fixed top-0 inset-x-0 z-50 bg-white">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 h-[88px] flex items-center justify-between">
+    <a href="#top" class="flex items-center gap-2.5">
+      <img src="Assets/IMG_4336.jpg" alt="Charged Professional Detailing" class="h-14 sm:h-16 w-auto" />
+      <img src="Assets/logo-icon.jpg" alt="" class="h-14 sm:h-16 w-auto" />
+    </a>
+    <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#before-after" class="nav-link">Before &amp; After</a>
+      <a href="#work" class="nav-link">Our Work</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </nav>
+    <a href="tel:+447709519480" class="btn-ghost hidden md:inline-flex items-center gap-2 px-4 py-3 rounded-full text-sm font-semibold mr-2" style="border-color:rgba(10,15,31,0.18); color:#0A0F1F;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92V20a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3.09a2 2 0 012 1.72c.13.96.37 1.9.72 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.38a2 2 0 012.11-.45c.91.35 1.85.59 2.81.72a2 2 0 011.72 2.12z"/></svg>
+      Call
+    </a>
+    <a href="booking.html" class="btn-primary hidden sm:inline-flex items-center gap-2 px-5 py-3 rounded-full text-sm font-semibold">
+      Book Now <span class="bolt" style="background:#fff;"></span>
+    </a>
+    <button id="navToggle" class="md:hidden p-2" aria-label="Toggle menu">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+    </button>
+  </div>
+  <div id="mobileMenu" class="hidden md:hidden bg-white">
+    <div class="px-5 py-5 flex flex-col gap-4 text-sm font-medium">
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#before-after" class="nav-link">Before &amp; After</a>
+      <a href="#work" class="nav-link">Our Work</a>
+      <a href="#contact" class="nav-link">Contact</a>
+      <a href="tel:+447709519480" class="btn-ghost inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-sm font-semibold" style="border-color:rgba(10,15,31,0.18); color:#0A0F1F;">Call 07709 519480</a>
+      <a href="booking.html" class="btn-primary inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-sm font-semibold">Book Now</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section id="top" class="hero min-h-screen flex items-center pt-[88px]">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 py-20 sm:py-28 w-full">
+    <div class="max-w-3xl">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="bolt"></span>
+        <span class="eyebrow text-white/90">Premium Mobile Detailing</span>
+      </div>
+      <h1 class="display text-white text-[56px] leading-[1.08] sm:text-[88px] sm:leading-[1.04] uppercase">
+        <span class="block pb-1">Your Ride,</span>
+        <span class="block text-brand-blue">Is Our Priority</span>
+      </h1>
+      <p class="text-white/80 text-lg sm:text-xl mt-7 max-w-xl leading-relaxed">
+        Charged Professional Detailing brings showroom-grade finishes to every vehicle — meticulous interiors, mirror-deep paint, and a service experience built around your time.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 mt-9">
+        <a href="booking.html" class="btn-primary inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full text-sm font-semibold uppercase tracking-wider">
+          Book a Detail <span class="bolt" style="background:#fff;"></span>
+        </a>
+        <a href="#services" class="btn-ghost inline-flex items-center justify-center px-7 py-4 rounded-full text-sm font-semibold uppercase tracking-wider">
+          View Services
+        </a>
+      </div>
+      <div class="mt-14 grid grid-cols-3 gap-6 sm:gap-10 max-w-lg">
+        <div>
+          <div class="display text-3xl sm:text-4xl text-white">100<span class="text-brand-blue">+</span></div>
+          <div class="text-white/70 text-xs sm:text-sm mt-1 uppercase tracking-wider">Vehicles Detailed</div>
+        </div>
+        <div>
+          <div class="display text-3xl sm:text-4xl text-white">4.7★</div>
+          <div class="text-white/70 text-xs sm:text-sm mt-1 uppercase tracking-wider">Customer Rated</div>
+        </div>
+        <div>
+          <div class="display text-3xl sm:text-4xl text-white">100<span class="text-brand-blue">%</span></div>
+          <div class="text-white/70 text-xs sm:text-sm mt-1 uppercase tracking-wider">Satisfaction</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MARQUEE STRIP ============ -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span class="marquee-item">MINI DETAIL</span><span class="marquee-item" aria-hidden="true"><span class="bolt" style="background:#fff;width:16px;height:20px;vertical-align:-2px;"></span></span>
+    <span class="marquee-item">FULL DETAIL</span><span class="marquee-item" aria-hidden="true"><span class="bolt" style="background:#fff;width:16px;height:20px;vertical-align:-2px;"></span></span>
+    <span class="marquee-item">STAGE 1·2·3 CORRECTION</span><span class="marquee-item" aria-hidden="true"><span class="bolt" style="background:#fff;width:16px;height:20px;vertical-align:-2px;"></span></span>
+    <span class="marquee-item">NEW CAR DETAIL</span><span class="marquee-item" aria-hidden="true"><span class="bolt" style="background:#fff;width:16px;height:20px;vertical-align:-2px;"></span></span>
+    <span class="marquee-item">FLEET &amp; COMMERCIAL</span><span class="marquee-item" aria-hidden="true"><span class="bolt" style="background:#fff;width:16px;height:20px;vertical-align:-2px;"></span></span>
+    <span class="marquee-item">PRE-SALE PREP</span><span class="marquee-item" aria-hidden="true"><span class="bolt" style="background:#fff;width:16px;height:20px;vertical-align:-2px;"></span></span>
+    <span class="marquee-item">MINI DETAIL</span><span class="marquee-item" aria-hidden="true"><span class="bolt" style="background:#fff;width:16px;height:20px;vertical-align:-2px;"></span></span>
+    <span class="marquee-item">FULL DETAIL</span><span class="marquee-item" aria-hidden="true"><span class="bolt" style="background:#fff;width:16px;height:20px;vertical-align:-2px;"></span></span>
+    <span class="marquee-item">STAGE 1·2·3 CORRECTION</span><span class="marquee-item" aria-hidden="true"><span class="bolt" style="background:#fff;width:16px;height:20px;vertical-align:-2px;"></span></span>
+    <span class="marquee-item">NEW CAR DETAIL</span><span class="marquee-item" aria-hidden="true"><span class="bolt" style="background:#fff;width:16px;height:20px;vertical-align:-2px;"></span></span>
+    <span class="marquee-item">FLEET &amp; COMMERCIAL</span><span class="marquee-item" aria-hidden="true"><span class="bolt" style="background:#fff;width:16px;height:20px;vertical-align:-2px;"></span></span>
+    <span class="marquee-item">PRE-SALE PREP</span><span class="marquee-item" aria-hidden="true"><span class="bolt" style="background:#fff;width:16px;height:20px;vertical-align:-2px;"></span></span>
+  </div>
+</div>
+
+<!-- ============ ABOUT / SERVICES ============ -->
+<section id="services" class="py-24 sm:py-32 bg-white">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="max-w-2xl mb-16 reveal">
+      <div class="flex items-center gap-3 mb-5">
+        <div class="bolt-divider"></div>
+        <span class="eyebrow" style="font-size:15px;">Services &amp; Pricing</span>
+      </div>
+      <h2 class="display text-5xl sm:text-6xl uppercase leading-[0.95]">
+        Detailing done <span class="text-brand-blue">properly.</span>
+      </h2>
+      <p class="text-base sm:text-lg text-brand-ink/70 mt-6 leading-relaxed">
+        Every detail is approached with precision, premium products, and proven techniques. Whether it's a daily driver, a weekend show car, or a working van — we bring the same obsessive attention to every job.
+      </p>
+    </div>
+
+    <!-- Detail Packages price list -->
+    <div class="reveal">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="bolt-divider"></div>
+        <span class="eyebrow" style="font-size:15px;">Detail Packages</span>
+      </div>
+      <!-- Desktop pricing table -->
+      <div class="hidden lg:block bg-white border border-black/5 rounded-2xl shadow-soft overflow-hidden">
+      <div class="grid grid-cols-[1.9fr_repeat(4,1fr)] items-center bg-brand-ink text-white">
+        <div class="px-7 py-4 text-xs uppercase tracking-widest text-white/60">Package</div>
+        <div class="px-3 py-4 text-center text-xs uppercase tracking-widest text-white/85">Hatchback</div>
+        <div class="px-3 py-4 text-center text-xs uppercase tracking-widest text-white/85">Saloon</div>
+        <div class="px-3 py-4 text-center text-xs uppercase tracking-widest text-white/85">Estate / 4×4</div>
+        <div class="px-3 py-4 text-center text-xs uppercase tracking-widest text-white/85">Van</div>
+      </div>
+      <div class="grid grid-cols-[1.9fr_repeat(4,1fr)] items-center border-t border-black/5 hover:bg-brand-mist transition-colors">
+        <div class="px-7 py-5">
+          <h3 class="display text-xl uppercase">Mini Detail</h3>
+          <p class="text-brand-ink/60 text-sm mt-1 leading-relaxed">A mini valet is a basic service with exterior washing OR interior vacuuming and surface wiping, excluding deeper cleaning services — wet-vac upholstery and carpets, interior protection, polishing etc.</p>
+        </div>
+        <div class="px-3 py-5 text-center display text-brand-blue text-lg">£30.00</div>
+        <div class="px-3 py-5 text-center display text-brand-blue text-lg">£40.00</div>
+        <div class="px-3 py-5 text-center display text-brand-blue text-lg">£50.00</div>
+        <div class="px-3 py-5 text-center display text-brand-blue text-lg">£80.00</div>
+      </div>
+      <div class="grid grid-cols-[1.9fr_repeat(4,1fr)] items-center border-t border-black/5 hover:bg-brand-mist transition-colors">
+        <div class="px-7 py-5">
+          <h3 class="display text-xl uppercase">Full Detail</h3>
+          <p class="text-brand-ink/60 text-sm mt-1 leading-relaxed">A full detail is a basic car cleaning service with exterior washing, interior vacuuming and surface wiping, excluding deeper cleaning services — wet-vac upholstery and carpets, interior protection, polishing etc.</p>
+        </div>
+        <div class="px-3 py-5 text-center display text-brand-blue text-lg">£50.00</div>
+        <div class="px-3 py-5 text-center display text-brand-blue text-lg">£60.00</div>
+        <div class="px-3 py-5 text-center display text-brand-blue text-lg">£70.00</div>
+        <div class="px-3 py-5 text-center display text-brand-blue text-lg">£90.00</div>
+      </div>
+      <div class="grid grid-cols-[1.9fr_repeat(4,1fr)] items-center border-t border-black/5 hover:bg-brand-mist transition-colors">
+        <div class="px-7 py-5">
+          <h3 class="display text-xl uppercase">Stage 1 Protection Detail</h3>
+          <p class="text-brand-ink/60 text-sm mt-1 leading-relaxed">Full vehicle decontamination including wheels, door shuts and logos, full citrus snow foam pre-wash, pressure washed, PH neutral snow foam two bucket wash method with shampoo, pressure washed, tar and iron deposits chemically removed, clay bar and lubricant to remove fine hidden contaminants on the paintwork and glass, cleaning panel wipes to remove any remaining oils, followed by a single stage machine polish and coated with your chosen protection (sealant or wax).</p>
+        </div>
+        <div class="px-3 py-5 text-center display text-brand-blue text-lg">£150.00</div>
+        <div class="px-3 py-5 text-center display text-brand-blue text-lg">£180.00</div>
+        <div class="px-3 py-5 text-center display text-brand-blue text-lg">£220.00</div>
+        <div class="px-3 py-5 text-center display text-brand-blue text-lg">£250.00</div>
+      </div>
+      <div class="grid grid-cols-[1.9fr_repeat(4,1fr)] items-center border-t border-black/5 hover:bg-brand-mist transition-colors">
+        <div class="px-7 py-5">
+          <h3 class="display text-xl uppercase">Stage 2 Correction Detail</h3>
+          <p class="text-brand-ink/60 text-sm mt-1 leading-relaxed">All plastic trims, headlights, badges, door handles and shuts are masked off to ensure no damage is caused whilst polishing. Level 1 — a medium cutting process is performed to remove swirls, scratches and defects. Bodywork is then wiped down using microfibre towels to remove dust particles from the first polishing process. Level 2 — a machine polish is then performed using fine compound to refine the paintwork, removing swirls/small imperfections on the glass and paint, and then coated with your chosen protection (sealant, wax or ceramic coating) — prices vary on protection.</p>
+        </div>
+        <div class="px-3 py-5 text-center display text-brand-blue text-lg">£220.00</div>
+        <div class="px-3 py-5 text-center display text-brand-blue text-lg">£250.00</div>
+        <div class="px-3 py-5 text-center display text-brand-blue text-lg">£270.00</div>
+        <div class="px-3 py-5 text-center display text-brand-blue text-lg">£290.00</div>
+      </div>
+      <div class="grid grid-cols-[1.9fr_repeat(4,1fr)] items-center border-t border-black/5 hover:bg-brand-mist transition-colors">
+        <div class="px-7 py-5">
+          <h3 class="display text-xl uppercase">Stage 3 Enhancement Detail</h3>
+          <p class="text-brand-ink/60 text-sm mt-1 leading-relaxed">Level 1 — a medium cutting process is performed to remove deeper scratches and defects. Bodywork is then wiped down using microfibre towels to remove dust particles from the first polishing process. Level 2 — a machine polish is then performed using fine compounds to refine the paintwork, removing swirl marks and leaving a mirror finish. Level 3 — a machine polish to enhance the paintwork, leaving a clear and smooth glass-like finish on the glass and paint, and then coated with your chosen protection (sealant, wax or ceramic coating) — prices vary on protection.</p>
+        </div>
+        <div class="px-3 py-5 text-center display text-brand-blue text-lg">£300.00</div>
+        <div class="px-3 py-5 text-center display text-brand-blue text-lg">£350.00</div>
+        <div class="px-3 py-5 text-center display text-brand-blue text-lg">£400.00</div>
+        <div class="px-3 py-5 text-center display text-brand-blue text-lg">£450.00</div>
+      </div>
+      <div class="grid grid-cols-[1.9fr_repeat(4,1fr)] items-center border-t border-black/5 hover:bg-brand-mist transition-colors">
+        <div class="px-7 py-5">
+          <h3 class="display text-xl uppercase">New Car Detail</h3>
+          <p class="text-brand-ink/60 text-sm mt-1 leading-relaxed">All services provided.</p>
+        </div>
+        <div class="px-3 py-5 text-center display text-brand-blue text-lg">£500.00</div>
+        <div class="px-3 py-5 text-center display text-brand-blue text-lg">£550.00</div>
+        <div class="px-3 py-5 text-center display text-brand-blue text-lg">£600.00</div>
+        <div class="px-3 py-5 text-center display text-brand-blue text-lg">£650.00</div>
+      </div>
+      </div>
+      <!-- Mobile pricing cards -->
+      <div class="lg:hidden space-y-4">
+      <div class="bg-white border border-black/5 rounded-2xl shadow-soft p-5">
+        <h3 class="display text-lg uppercase">Mini Detail</h3>
+        <p class="text-brand-ink/60 text-sm mt-1 leading-relaxed">A mini valet is a basic service with exterior washing OR interior vacuuming and surface wiping, excluding deeper cleaning services — wet-vac upholstery and carpets, interior protection, polishing etc.</p>
+        <div class="grid grid-cols-2 gap-2 mt-4">
+          <div class="flex items-center justify-between bg-brand-mist rounded-lg px-3 py-2">
+            <span class="text-[11px] uppercase tracking-wider text-brand-ink/55">Hatchback</span>
+            <span class="display text-brand-blue text-sm">£30.00</span>
+          </div>
+          <div class="flex items-center justify-between bg-brand-mist rounded-lg px-3 py-2">
+            <span class="text-[11px] uppercase tracking-wider text-brand-ink/55">Saloon</span>
+            <span class="display text-brand-blue text-sm">£40.00</span>
+          </div>
+          <div class="flex items-center justify-between bg-brand-mist rounded-lg px-3 py-2">
+            <span class="text-[11px] uppercase tracking-wider text-brand-ink/55">Estate / 4×4</span>
+            <span class="display text-brand-blue text-sm">£50.00</span>
+          </div>
+          <div class="flex items-center justify-between bg-brand-mist rounded-lg px-3 py-2">
+            <span class="text-[11px] uppercase tracking-wider text-brand-ink/55">Van</span>
+            <span class="display text-brand-blue text-sm">£80.00</span>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white border border-black/5 rounded-2xl shadow-soft p-5">
+        <h3 class="display text-lg uppercase">Full Detail</h3>
+        <p class="text-brand-ink/60 text-sm mt-1 leading-relaxed">A full detail is a basic car cleaning service with exterior washing, interior vacuuming and surface wiping, excluding deeper cleaning services — wet-vac upholstery and carpets, interior protection, polishing etc.</p>
+        <div class="grid grid-cols-2 gap-2 mt-4">
+          <div class="flex items-center justify-between bg-brand-mist rounded-lg px-3 py-2">
+            <span class="text-[11px] uppercase tracking-wider text-brand-ink/55">Hatchback</span>
+            <span class="display text-brand-blue text-sm">£50.00</span>
+          </div>
+          <div class="flex items-center justify-between bg-brand-mist rounded-lg px-3 py-2">
+            <span class="text-[11px] uppercase tracking-wider text-brand-ink/55">Saloon</span>
+            <span class="display text-brand-blue text-sm">£60.00</span>
+          </div>
+          <div class="flex items-center justify-between bg-brand-mist rounded-lg px-3 py-2">
+            <span class="text-[11px] uppercase tracking-wider text-brand-ink/55">Estate / 4×4</span>
+            <span class="display text-brand-blue text-sm">£70.00</span>
+          </div>
+          <div class="flex items-center justify-between bg-brand-mist rounded-lg px-3 py-2">
+            <span class="text-[11px] uppercase tracking-wider text-brand-ink/55">Van</span>
+            <span class="display text-brand-blue text-sm">£90.00</span>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white border border-black/5 rounded-2xl shadow-soft p-5">
+        <h3 class="display text-lg uppercase">Stage 1 Protection Detail</h3>
+        <p class="text-brand-ink/60 text-sm mt-1 leading-relaxed">Full vehicle decontamination including wheels, door shuts and logos, full citrus snow foam pre-wash, pressure washed, PH neutral snow foam two bucket wash method with shampoo, pressure washed, tar and iron deposits chemically removed, clay bar and lubricant to remove fine hidden contaminants on the paintwork and glass, cleaning panel wipes to remove any remaining oils, followed by a single stage machine polish and coated with your chosen protection (sealant or wax).</p>
+        <div class="grid grid-cols-2 gap-2 mt-4">
+          <div class="flex items-center justify-between bg-brand-mist rounded-lg px-3 py-2">
+            <span class="text-[11px] uppercase tracking-wider text-brand-ink/55">Hatchback</span>
+            <span class="display text-brand-blue text-sm">£150.00</span>
+          </div>
+          <div class="flex items-center justify-between bg-brand-mist rounded-lg px-3 py-2">
+            <span class="text-[11px] uppercase tracking-wider text-brand-ink/55">Saloon</span>
+            <span class="display text-brand-blue text-sm">£180.00</span>
+          </div>
+          <div class="flex items-center justify-between bg-brand-mist rounded-lg px-3 py-2">
+            <span class="text-[11px] uppercase tracking-wider text-brand-ink/55">Estate / 4×4</span>
+            <span class="display text-brand-blue text-sm">£220.00</span>
+          </div>
+          <div class="flex items-center justify-between bg-brand-mist rounded-lg px-3 py-2">
+            <span class="text-[11px] uppercase tracking-wider text-brand-ink/55">Van</span>
+            <span class="display text-brand-blue text-sm">£250.00</span>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white border border-black/5 rounded-2xl shadow-soft p-5">
+        <h3 class="display text-lg uppercase">Stage 2 Correction Detail</h3>
+        <p class="text-brand-ink/60 text-sm mt-1 leading-relaxed">All plastic trims, headlights, badges, door handles and shuts are masked off to ensure no damage is caused whilst polishing. Level 1 — a medium cutting process is performed to remove swirls, scratches and defects. Bodywork is then wiped down using microfibre towels to remove dust particles from the first polishing process. Level 2 — a machine polish is then performed using fine compound to refine the paintwork, removing swirls/small imperfections on the glass and paint, and then coated with your chosen protection (sealant, wax or ceramic coating) — prices vary on protection.</p>
+        <div class="grid grid-cols-2 gap-2 mt-4">
+          <div class="flex items-center justify-between bg-brand-mist rounded-lg px-3 py-2">
+            <span class="text-[11px] uppercase tracking-wider text-brand-ink/55">Hatchback</span>
+            <span class="display text-brand-blue text-sm">£220.00</span>
+          </div>
+          <div class="flex items-center justify-between bg-brand-mist rounded-lg px-3 py-2">
+            <span class="text-[11px] uppercase tracking-wider text-brand-ink/55">Saloon</span>
+            <span class="display text-brand-blue text-sm">£250.00</span>
+          </div>
+          <div class="flex items-center justify-between bg-brand-mist rounded-lg px-3 py-2">
+            <span class="text-[11px] uppercase tracking-wider text-brand-ink/55">Estate / 4×4</span>
+            <span class="display text-brand-blue text-sm">£270.00</span>
+          </div>
+          <div class="flex items-center justify-between bg-brand-mist rounded-lg px-3 py-2">
+            <span class="text-[11px] uppercase tracking-wider text-brand-ink/55">Van</span>
+            <span class="display text-brand-blue text-sm">£290.00</span>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white border border-black/5 rounded-2xl shadow-soft p-5">
+        <h3 class="display text-lg uppercase">Stage 3 Enhancement Detail</h3>
+        <p class="text-brand-ink/60 text-sm mt-1 leading-relaxed">Level 1 — a medium cutting process is performed to remove deeper scratches and defects. Bodywork is then wiped down using microfibre towels to remove dust particles from the first polishing process. Level 2 — a machine polish is then performed using fine compounds to refine the paintwork, removing swirl marks and leaving a mirror finish. Level 3 — a machine polish to enhance the paintwork, leaving a clear and smooth glass-like finish on the glass and paint, and then coated with your chosen protection (sealant, wax or ceramic coating) — prices vary on protection.</p>
+        <div class="grid grid-cols-2 gap-2 mt-4">
+          <div class="flex items-center justify-between bg-brand-mist rounded-lg px-3 py-2">
+            <span class="text-[11px] uppercase tracking-wider text-brand-ink/55">Hatchback</span>
+            <span class="display text-brand-blue text-sm">£300.00</span>
+          </div>
+          <div class="flex items-center justify-between bg-brand-mist rounded-lg px-3 py-2">
+            <span class="text-[11px] uppercase tracking-wider text-brand-ink/55">Saloon</span>
+            <span class="display text-brand-blue text-sm">£350.00</span>
+          </div>
+          <div class="flex items-center justify-between bg-brand-mist rounded-lg px-3 py-2">
+            <span class="text-[11px] uppercase tracking-wider text-brand-ink/55">Estate / 4×4</span>
+            <span class="display text-brand-blue text-sm">£400.00</span>
+          </div>
+          <div class="flex items-center justify-between bg-brand-mist rounded-lg px-3 py-2">
+            <span class="text-[11px] uppercase tracking-wider text-brand-ink/55">Van</span>
+            <span class="display text-brand-blue text-sm">£450.00</span>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white border border-black/5 rounded-2xl shadow-soft p-5">
+        <h3 class="display text-lg uppercase">New Car Detail</h3>
+        <p class="text-brand-ink/60 text-sm mt-1 leading-relaxed">All services provided.</p>
+        <div class="grid grid-cols-2 gap-2 mt-4">
+          <div class="flex items-center justify-between bg-brand-mist rounded-lg px-3 py-2">
+            <span class="text-[11px] uppercase tracking-wider text-brand-ink/55">Hatchback</span>
+            <span class="display text-brand-blue text-sm">£500.00</span>
+          </div>
+          <div class="flex items-center justify-between bg-brand-mist rounded-lg px-3 py-2">
+            <span class="text-[11px] uppercase tracking-wider text-brand-ink/55">Saloon</span>
+            <span class="display text-brand-blue text-sm">£550.00</span>
+          </div>
+          <div class="flex items-center justify-between bg-brand-mist rounded-lg px-3 py-2">
+            <span class="text-[11px] uppercase tracking-wider text-brand-ink/55">Estate / 4×4</span>
+            <span class="display text-brand-blue text-sm">£600.00</span>
+          </div>
+          <div class="flex items-center justify-between bg-brand-mist rounded-lg px-3 py-2">
+            <span class="text-[11px] uppercase tracking-wider text-brand-ink/55">Van</span>
+            <span class="display text-brand-blue text-sm">£650.00</span>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- More services -->
+    <div class="mt-14 reveal">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="bolt-divider"></div>
+        <span class="eyebrow">More Services</span>
+      </div>
+      <div class="grid sm:grid-cols-3 gap-5">
+        <div class="service-card rounded-2xl p-6">
+          <div class="flex items-center justify-between mb-3 gap-3">
+            <h3 class="display text-xl uppercase">Maintenance Plan</h3>
+            <span class="text-xs font-semibold uppercase tracking-wider text-brand-blue bg-brand-blue/10 px-3 py-1.5 rounded-full whitespace-nowrap">Enquire</span>
+          </div>
+          <p class="text-brand-ink/65 text-sm leading-relaxed">Recurring visits from weekly to monthly at a discounted rate after your first detail.</p>
+        </div>
+        <div class="service-card rounded-2xl p-6">
+          <div class="flex items-center justify-between mb-3 gap-3">
+            <h3 class="display text-xl uppercase">Fleet &amp; Commercial</h3>
+            <span class="text-xs font-semibold uppercase tracking-wider text-brand-blue bg-brand-blue/10 px-3 py-1.5 rounded-full whitespace-nowrap">Enquire</span>
+          </div>
+          <p class="text-brand-ink/65 text-sm leading-relaxed">Vans, taxis and company cars kept sharp with scheduled servicing.</p>
+        </div>
+        <div class="service-card rounded-2xl p-6">
+          <div class="flex items-center justify-between mb-3 gap-3">
+            <h3 class="display text-xl uppercase">Pre-Sale Prep</h3>
+            <span class="text-xs font-semibold uppercase tracking-wider text-brand-blue bg-brand-blue/10 px-3 py-1.5 rounded-full whitespace-nowrap">Enquire</span>
+          </div>
+          <p class="text-brand-ink/65 text-sm leading-relaxed">Selling up? We get your vehicle ready to photograph and sell at its best.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add-ons -->
+    <div class="mt-14 reveal">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="bolt-divider"></div>
+        <span class="eyebrow">Add-Ons</span>
+      </div>
+      <div class="bg-white border border-black/5 rounded-2xl shadow-soft p-6 sm:p-8">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10">
+          <div class="flex items-baseline justify-between gap-3 py-3 border-b border-black/5">
+            <span class="text-brand-ink/80 text-sm">Screen Wash Top Up</span>
+            <span class="display text-brand-blue text-sm whitespace-nowrap">£10</span>
+          </div>
+          <div class="flex items-baseline justify-between gap-3 py-3 border-b border-black/5">
+            <span class="text-brand-ink/80 text-sm">Child Car Seat Clean</span>
+            <span class="display text-brand-blue text-sm whitespace-nowrap">£15</span>
+          </div>
+          <div class="flex items-baseline justify-between gap-3 py-3 border-b border-black/5">
+            <span class="text-brand-ink/80 text-sm">Engine Bay Detail</span>
+            <span class="display text-brand-blue text-sm whitespace-nowrap">£20</span>
+          </div>
+          <div class="flex items-baseline justify-between gap-3 py-3 border-b border-black/5">
+            <span class="text-brand-ink/80 text-sm">Interior Wet Vac</span>
+            <span class="display text-brand-blue text-sm whitespace-nowrap">£20</span>
+          </div>
+          <div class="flex items-baseline justify-between gap-3 py-3 border-b border-black/5">
+            <span class="text-brand-ink/80 text-sm">Interior Hydrophobic Protection</span>
+            <span class="display text-brand-blue text-sm whitespace-nowrap">£20</span>
+          </div>
+          <div class="flex items-baseline justify-between gap-3 py-3 border-b border-black/5">
+            <span class="text-brand-ink/80 text-sm">Rust Removal</span>
+            <span class="display text-brand-blue text-sm whitespace-nowrap">£20</span>
+          </div>
+          <div class="flex items-baseline justify-between gap-3 py-3 border-b border-black/5">
+            <span class="text-brand-ink/80 text-sm">Windshield / Glass Coating</span>
+            <span class="display text-brand-blue text-sm whitespace-nowrap">£20</span>
+          </div>
+          <div class="flex items-baseline justify-between gap-3 py-3 border-b border-black/5">
+            <span class="text-brand-ink/80 text-sm">Head Liner Detail</span>
+            <span class="display text-brand-blue text-sm whitespace-nowrap">£20</span>
+          </div>
+          <div class="flex items-baseline justify-between gap-3 py-3 border-b border-black/5">
+            <span class="text-brand-ink/80 text-sm">Trim Restoration</span>
+            <span class="display text-brand-blue text-sm whitespace-nowrap">£20</span>
+          </div>
+          <div class="flex items-baseline justify-between gap-3 py-3 border-b border-black/5">
+            <span class="text-brand-ink/80 text-sm">Pet Hair Removal</span>
+            <span class="display text-brand-blue text-sm whitespace-nowrap">£20</span>
+          </div>
+          <div class="flex items-baseline justify-between gap-3 py-3 border-b border-black/5">
+            <span class="text-brand-ink/80 text-sm">Mould Removal</span>
+            <span class="display text-brand-blue text-sm whitespace-nowrap">£30</span>
+          </div>
+          <div class="flex items-baseline justify-between gap-3 py-3 border-b border-black/5">
+            <span class="text-brand-ink/80 text-sm">Exterior Chrome Polish</span>
+            <span class="display text-brand-blue text-sm whitespace-nowrap">£30</span>
+          </div>
+          <div class="flex items-baseline justify-between gap-3 py-3 border-b border-black/5">
+            <span class="text-brand-ink/80 text-sm">Alloy Removal &amp; Deep Clean</span>
+            <span class="display text-brand-blue text-sm whitespace-nowrap">£40</span>
+          </div>
+          <div class="flex items-baseline justify-between gap-3 py-3 border-b border-black/5">
+            <span class="text-brand-ink/80 text-sm">Emblem Removal / Replacement</span>
+            <span class="display text-brand-blue text-sm whitespace-nowrap">£40</span>
+          </div>
+          <div class="flex items-baseline justify-between gap-3 py-3 border-b border-black/5">
+            <span class="text-brand-ink/80 text-sm">Glass Machine Polish</span>
+            <span class="display text-brand-blue text-sm whitespace-nowrap">£50</span>
+          </div>
+          <div class="flex items-baseline justify-between gap-3 py-3 border-b border-black/5">
+            <span class="text-brand-ink/80 text-sm">Seat Removal &amp; Deep Clean</span>
+            <span class="display text-brand-blue text-sm whitespace-nowrap">£50</span>
+          </div>
+          <div class="flex items-baseline justify-between gap-3 py-3 border-b border-black/5">
+            <span class="text-brand-ink/80 text-sm">Leather Coating</span>
+            <span class="display text-brand-blue text-sm whitespace-nowrap">£50</span>
+          </div>
+          <div class="flex items-baseline justify-between gap-3 py-3 border-b border-black/5">
+            <span class="text-brand-ink/80 text-sm">Headlight Restoration</span>
+            <span class="display text-brand-blue text-sm whitespace-nowrap">£60</span>
+          </div>
+          <div class="flex items-baseline justify-between gap-3 py-3 border-b border-black/5">
+            <span class="text-brand-ink/80 text-sm">Interior Machine Polish</span>
+            <span class="display text-brand-blue text-sm whitespace-nowrap">£60</span>
+          </div>
+          <div class="flex items-baseline justify-between gap-3 py-3 border-b border-black/5">
+            <span class="text-brand-ink/80 text-sm">Alloy Polish &amp; Protection</span>
+            <span class="display text-brand-blue text-sm whitespace-nowrap">£100</span>
+          </div>
+          <div class="flex items-baseline justify-between gap-3 py-3 border-b border-black/5">
+            <span class="text-brand-ink/80 text-sm">Brake Calliper Respray</span>
+            <span class="display text-brand-blue text-sm whitespace-nowrap">£100</span>
+          </div>
+        </div>
+        <p class="text-brand-ink/50 text-sm mt-6">Add any of these to your booking — select them on the booking form or ask for a quote.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURE / IN ACTION ============ -->
+<section class="py-24 sm:py-32 bg-brand-mist">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div class="reveal">
+        <div class="rounded-3xl overflow-hidden shadow-card relative">
+          <img src="Assets/IMG_4340.jpg" alt="Hand polishing paint correction" class="w-full h-auto block" />
+          <div class="absolute top-5 left-5 bg-brand-blue text-white display uppercase tracking-wider text-xs px-4 py-2 rounded-full">In The Bay</div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="bolt-divider"></div>
+          <span class="eyebrow">The Process</span>
+        </div>
+        <h2 class="display text-5xl sm:text-6xl uppercase leading-[0.95] mb-6">
+          Hand-finished. <span class="text-brand-blue">Every panel.</span>
+        </h2>
+        <p class="text-brand-ink/70 leading-relaxed text-lg mb-8">
+          Detailing isn't a wash — it's a craft. Each stage is carried out by hand using professional-grade products and the right technique for your vehicle's paint and condition.
+        </p>
+        <ul class="space-y-5">
+          <li class="flex gap-4">
+            <div class="shrink-0 w-9 h-9 rounded-full bg-brand-blue text-white display flex items-center justify-center text-sm">01</div>
+            <div>
+              <div class="display text-xl uppercase">Inspection</div>
+              <div class="text-brand-ink/65 text-[15px] leading-relaxed">Paint depth, swirl mapping, contamination check.</div>
+            </div>
+          </li>
+          <li class="flex gap-4">
+            <div class="shrink-0 w-9 h-9 rounded-full bg-brand-blue text-white display flex items-center justify-center text-sm">02</div>
+            <div>
+              <div class="display text-xl uppercase">Decontamination</div>
+              <div class="text-brand-ink/65 text-[15px] leading-relaxed">Safe multi-stage wash process, iron remover and clay bar.</div>
+            </div>
+          </li>
+          <li class="flex gap-4">
+            <div class="shrink-0 w-9 h-9 rounded-full bg-brand-blue text-white display flex items-center justify-center text-sm">03</div>
+            <div>
+              <div class="display text-xl uppercase">Correction &amp; Protection</div>
+              <div class="text-brand-ink/65 text-[15px] leading-relaxed">Machine polish — choose from wax, sealant or ceramic coating for long-term protection and shine.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT / MEET ELTON ============ -->
+<section id="about" class="py-24 sm:py-32 bg-brand-mist">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+      <!-- Photo -->
+      <div class="lg:col-span-5 reveal">
+        <div class="lg:sticky lg:top-28">
+          <div class="rounded-3xl overflow-hidden shadow-card relative">
+            <img src="Assets/about-elton.jpg" alt="Elton, founder of Charged Professional Detailing, detailing a van" class="w-full h-auto block" />
+            <div class="absolute bottom-5 left-5 bg-brand-blue text-white display uppercase tracking-wider text-xs px-4 py-2 rounded-full">Elton · Founder</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Text -->
+      <div class="lg:col-span-7 reveal">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="bolt-divider"></div>
+          <span class="eyebrow" style="font-size:15px;">About</span>
+        </div>
+        <h2 class="display text-5xl sm:text-6xl uppercase leading-[0.95] mb-6">
+          Meet <span class="text-brand-blue">Elton</span>
+        </h2>
+        <div class="space-y-4 text-brand-ink/75 leading-relaxed text-[15px] sm:text-base">
+          <p>Hi, I'm Elton, the founder and detailer behind Charged Professional Detailing.</p>
+          <p>Based in Rotherham and Sheffield, I provide professional mobile detailing services throughout South Yorkshire and beyond, with the flexibility to travel wherever my customers need me.</p>
+          <p>My journey into detailing began unexpectedly after restoring and using an old pressure washer that had been thrown away. What started as simply cleaning my own vehicle quickly developed into a genuine passion for vehicle care and presentation, eventually becoming the foundation for Charged Professional Detailing.</p>
+          <p>Today, that same passion drives every service I provide. Whether it's a daily driver, a family SUV, a weekend show car, or a hardworking van, every vehicle is treated with the same level of care and attention as if it were my own.</p>
+        </div>
+
+        <h3 class="display text-2xl uppercase mt-10 mb-3">My Standards</h3>
+        <div class="space-y-4 text-brand-ink/75 leading-relaxed text-[15px] sm:text-base">
+          <p>I believe that exceptional results come from doing things properly. That's why I've invested in professional training and am accredited to carry out machine polishing using a Dual Action (DA) polisher, ensuring paintwork enhancement and correction is completed using safe, proven techniques.</p>
+          <p>Every vehicle is treated using professional-grade equipment, carefully selected products, and safe wash methods designed to deliver effective, non-damaging results. From routine maintenance details to more advanced interior and exterior services, every stage of the process is carried out with precision, consistency, and control.</p>
+          <p>I understand that handing someone the keys to your vehicle requires trust. That's why I approach every job with the same professionalism and care that I'd expect if I were leaving my own vehicle in someone else's hands.</p>
+        </div>
+
+        <h3 class="display text-2xl uppercase mt-10 mb-3">My Philosophy</h3>
+        <div class="space-y-4 text-brand-ink/75 leading-relaxed text-[15px] sm:text-base">
+          <p>My philosophy is simple: never rush, never cut corners, and never settle for “good enough.” Exceptional results are built through patience, precision, and attention to the smallest details.</p>
+          <p>Continuous improvement is also part of the standard. I am always developing my skills, refining my techniques, and investing in better processes to ensure every customer receives the highest level of workmanship possible.</p>
+        </div>
+
+        <h3 class="display text-2xl uppercase mt-10 mb-3">My Promise</h3>
+        <div class="space-y-4 text-brand-ink/75 leading-relaxed text-[15px] sm:text-base">
+          <p>Whether it's a daily driver, a family SUV, a weekend toy, or a hardworking van, every vehicle receives the same meticulous approach and professional care.</p>
+          <p>Because at Charged Professional Detailing, <span class="text-brand-ink font-semibold">Your Ride Is Our Priority.</span></p>
+        </div>
+
+        <a href="booking.html" class="btn-primary inline-flex items-center gap-2 px-7 py-4 rounded-full text-sm font-semibold uppercase tracking-wider mt-10">
+          Book Your Detail <span class="bolt" style="background:#fff;"></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BEFORE & AFTER ============ -->
+<section id="before-after" class="py-24 sm:py-32 bg-white">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="max-w-2xl mb-16 reveal">
+      <div class="flex items-center gap-3 mb-5">
+        <div class="bolt-divider"></div>
+        <span class="eyebrow">Real Results</span>
+      </div>
+      <h2 class="display text-5xl sm:text-6xl uppercase leading-[0.95]">
+        Before <span class="text-brand-blue">&amp;</span> After
+      </h2>
+      <p class="text-base sm:text-lg text-brand-ink/70 mt-6 leading-relaxed">
+        The proof is in the transformation. Real jobs, real customers, real results.
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+      <div class="reveal">
+        <div class="rounded-2xl overflow-hidden shadow-soft relative bg-brand-ink/5">
+          <span class="absolute top-3 left-3 z-10 bg-brand-blue text-white display uppercase tracking-wider text-[11px] px-3 py-1.5 rounded-full">Before → After</span>
+          <img src="Assets/ba-dashboard.jpg" alt="Before and after — dashboard and centre console" class="w-full aspect-[9/8] object-cover" />
+        </div>
+        <div class="mt-4 display uppercase text-lg">Dashboard &amp; Console</div>
+      </div>
+      <div class="reveal">
+        <div class="rounded-2xl overflow-hidden shadow-soft relative bg-brand-ink/5">
+          <span class="absolute top-3 left-3 z-10 bg-brand-blue text-white display uppercase tracking-wider text-[11px] px-3 py-1.5 rounded-full">Before → After</span>
+          <img src="Assets/ba-seats.jpg" alt="Before and after — seats and upholstery" class="w-full aspect-[9/8] object-cover" />
+        </div>
+        <div class="mt-4 display uppercase text-lg">Seats &amp; Upholstery</div>
+      </div>
+      <div class="reveal">
+        <div class="rounded-2xl overflow-hidden shadow-soft relative bg-brand-ink/5">
+          <span class="absolute top-3 left-3 z-10 bg-brand-blue text-white display uppercase tracking-wider text-[11px] px-3 py-1.5 rounded-full">Before → After</span>
+          <img src="Assets/ba-van-footwell.jpg" alt="Before and after — van footwell" class="w-full aspect-[9/8] object-cover" />
+        </div>
+        <div class="mt-4 display uppercase text-lg">Footwell &amp; Mats</div>
+      </div>
+      <div class="reveal">
+        <div class="rounded-2xl overflow-hidden shadow-soft relative bg-brand-ink/5">
+          <span class="absolute top-3 left-3 z-10 bg-brand-blue text-white display uppercase tracking-wider text-[11px] px-3 py-1.5 rounded-full">Before → After</span>
+          <img src="Assets/ba-seat.jpg" alt="Before and after — seat and footwell" class="w-full aspect-[9/8] object-cover" />
+        </div>
+        <div class="mt-4 display uppercase text-lg">Seat &amp; Carpet</div>
+      </div>
+      <div class="reveal">
+        <div class="rounded-2xl overflow-hidden shadow-soft relative bg-brand-ink/5">
+          <span class="absolute top-3 left-3 z-10 bg-brand-blue text-white display uppercase tracking-wider text-[11px] px-3 py-1.5 rounded-full">Before → After</span>
+          <img src="Assets/ba-wheel.jpg" alt="Before and after — wheels and arches" class="w-full aspect-[9/8] object-cover" />
+        </div>
+        <div class="mt-4 display uppercase text-lg">Wheels &amp; Arches</div>
+      </div>
+      <div class="reveal">
+        <div class="rounded-2xl overflow-hidden shadow-soft relative bg-brand-ink/5">
+          <span class="absolute top-3 left-3 z-10 bg-brand-blue text-white display uppercase tracking-wider text-[11px] px-3 py-1.5 rounded-full">Before → After</span>
+          <img src="Assets/ba-exhaust.jpg" alt="Before and after — exhaust tips" class="w-full aspect-[9/8] object-cover" />
+        </div>
+        <div class="mt-4 display uppercase text-lg">Exhaust Tips</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALLERY / OUR WORK ============ -->
+<section id="work" class="py-24 sm:py-32 bg-brand-ink relative overflow-hidden">
+  <!-- subtle bolt pattern backdrop -->
+  <div class="absolute inset-0 opacity-[0.04] pointer-events-none" style="background-image: radial-gradient(circle at 30% 20%, rgba(30,91,255,0.6), transparent 50%), radial-gradient(circle at 80% 80%, rgba(30,91,255,0.4), transparent 50%);"></div>
+
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 relative">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14 reveal">
+      <div class="max-w-2xl">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="bolt-divider"></div>
+          <span class="eyebrow text-brand-blue">Our Work</span>
+        </div>
+        <h2 class="display text-5xl sm:text-6xl uppercase text-white leading-[0.95]">
+          Recently <span class="text-brand-blue">charged.</span>
+        </h2>
+      </div>
+      <p class="text-white/65 max-w-md leading-relaxed">
+        A look at recent details — from family SUVs to performance saloons. Every car, every finish, hand-perfected.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+      <div class="gallery-img reveal">
+        <img src="Assets/rc-bmw-mint.jpg" alt="Mint green BMW after detail" class="w-full h-full object-cover aspect-[4/5] block" />
+      </div>
+      <div class="gallery-img reveal">
+        <img src="Assets/rc-velar.jpg" alt="White Range Rover Velar after detail" class="w-full h-full object-cover aspect-[4/5] block" />
+      </div>
+      <div class="gallery-img reveal">
+        <img src="Assets/rc-bmw-silver.jpg" alt="Silver BMW after detail" class="w-full h-full object-cover aspect-[4/5] block" />
+      </div>
+      <div class="gallery-img reveal">
+        <img src="Assets/rc-mercedes.jpg" alt="Black Mercedes after detail" class="w-full h-full object-cover aspect-[4/5] block" />
+      </div>
+      <div class="gallery-img reveal">
+        <img src="Assets/rc-audi.jpg" alt="Black Audi after detail" class="w-full h-full object-cover aspect-[4/5] block" />
+      </div>
+      <div class="gallery-img reveal">
+        <img src="Assets/rc-puma.jpg" alt="Silver Ford Puma after detail" class="w-full h-full object-cover aspect-[4/5] block" />
+      </div>
+    </div>
+
+    <div class="reveal mt-6 lg:mt-8 bg-brand-blue text-white p-7 sm:p-9 rounded-2xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+      <div>
+        <div class="text-white/80 eyebrow mb-2">Ready When You Are</div>
+        <h3 class="display text-2xl sm:text-3xl uppercase leading-tight">Want your ride on this wall?</h3>
+      </div>
+      <a href="booking.html" class="self-start sm:self-auto inline-flex items-center gap-2 bg-white text-brand-ink px-6 py-3 rounded-full font-semibold text-sm uppercase tracking-wider hover:translate-y-[-2px]" style="transition: transform 200ms cubic-bezier(.2,.8,.2,1);">
+        Book Your Detail <span class="bolt"></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIAL STRIP ============ -->
+<section class="py-24 sm:py-28 bg-white">
+  <div class="max-w-4xl mx-auto px-5 sm:px-8 text-center reveal">
+    <div class="bolt mx-auto mb-6"></div>
+    <p class="display text-3xl sm:text-5xl leading-[1.1] uppercase">
+      “Honestly the best detailing service I've used. Picked up the car and it looked better than the day I bought it.”
+    </p>
+    <div class="mt-8 text-brand-ink/60 text-sm uppercase tracking-widest">— Verified Customer</div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="py-24 sm:py-32 bg-brand-mist">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-20">
+      <div class="reveal">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="bolt-divider"></div>
+          <span class="eyebrow">Get In Touch</span>
+        </div>
+        <h2 class="display text-5xl sm:text-6xl uppercase leading-[0.95] mb-6">
+          Book your <span class="text-brand-blue">detail.</span>
+        </h2>
+        <p class="text-brand-ink/70 leading-relaxed text-lg mb-8">
+          Tell us about your vehicle and what you're after. We'll get back within 24 hours with a tailored quote and the next available slot.
+        </p>
+
+        <a href="booking.html" class="btn-primary inline-flex items-center gap-2 px-7 py-4 rounded-full text-sm font-semibold uppercase tracking-wider mb-10">
+          Book Online <span class="bolt" style="background:#fff;"></span>
+        </a>
+
+        <div class="space-y-6">
+          <a href="tel:+447709519480" class="flex items-start gap-4 group">
+            <div class="w-11 h-11 rounded-xl bg-brand-blue/10 flex items-center justify-center shrink-0">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1E5BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92V20a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3.09a2 2 0 012 1.72c.13.96.37 1.9.72 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.38a2 2 0 012.11-.45c.91.35 1.85.59 2.81.72a2 2 0 011.72 2.12z"/></svg>
+            </div>
+            <div>
+              <div class="text-xs uppercase tracking-widest text-brand-ink/55">Call</div>
+              <div class="display uppercase text-xl group-hover:text-brand-blue transition-colors">07709 519480</div>
+            </div>
+          </a>
+          <a href="https://wa.me/447709519480" target="_blank" rel="noopener" class="flex items-start gap-4 group">
+            <div class="w-11 h-11 rounded-xl bg-brand-blue/10 flex items-center justify-center shrink-0">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#1E5BFF"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-.607z"/></svg>
+            </div>
+            <div>
+              <div class="text-xs uppercase tracking-widest text-brand-ink/55">WhatsApp</div>
+              <div class="display uppercase text-xl group-hover:text-brand-blue transition-colors">07709 519480</div>
+            </div>
+          </a>
+          <a href="mailto:charged_detailing@outlook.com" class="flex items-start gap-4 group">
+            <div class="w-11 h-11 rounded-xl bg-brand-blue/10 flex items-center justify-center shrink-0">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1E5BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <div class="text-xs uppercase tracking-widest text-brand-ink/55">Email</div>
+              <div class="display uppercase text-lg sm:text-xl group-hover:text-brand-blue transition-colors break-all">charged_detailing@outlook.com</div>
+            </div>
+          </a>
+          <div class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-brand-blue/10 flex items-center justify-center shrink-0">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1E5BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+            </div>
+            <div>
+              <div class="text-xs uppercase tracking-widest text-brand-ink/55">Hours</div>
+              <div class="display uppercase text-xl">By Appointment</div>
+              <a href="booking.html" class="text-sm text-brand-blue font-semibold hover:underline">Book online for live availability →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <form class="reveal bg-white rounded-2xl p-8 sm:p-10 shadow-soft border border-black/5" onsubmit="sendQuickEnquiry(event)">
+        <div class="space-y-5">
+          <div>
+            <label class="text-xs uppercase tracking-widest text-brand-ink/60 font-semibold" for="name">Name</label>
+            <input id="name" type="text" required class="field mt-2" placeholder="Your full name" />
+          </div>
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label class="text-xs uppercase tracking-widest text-brand-ink/60 font-semibold" for="email">Email</label>
+              <input id="email" type="email" required class="field mt-2" placeholder="you@email.com" />
+            </div>
+            <div>
+              <label class="text-xs uppercase tracking-widest text-brand-ink/60 font-semibold" for="phone">Phone</label>
+              <input id="phone" type="tel" class="field mt-2" placeholder="07000 000 000" />
+            </div>
+          </div>
+          <div>
+            <label class="text-xs uppercase tracking-widest text-brand-ink/60 font-semibold" for="vehicle">Vehicle</label>
+            <input id="vehicle" type="text" class="field mt-2" placeholder="Make, model, year" />
+          </div>
+          <div>
+            <label class="text-xs uppercase tracking-widest text-brand-ink/60 font-semibold" for="service">Service Required</label>
+            <select id="service" class="field mt-2 bg-white">
+              <option>Mini Detail — from £30</option>
+              <option>Full Detail — from £50</option>
+              <option>Stage 1 Protection Detail — from £150</option>
+              <option>Stage 2 Correction Detail — from £220</option>
+              <option>Stage 3 Enhancement Detail — from £300</option>
+              <option>New Car Detail — from £500</option>
+              <option>Maintenance Plan — enquire</option>
+              <option>Add-ons / Extras — enquire</option>
+              <option>Fleet &amp; Commercial — enquire</option>
+              <option>Pre-Sale Prep — enquire</option>
+              <option>Not sure — please advise</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-xs uppercase tracking-widest text-brand-ink/60 font-semibold" for="message">Notes</label>
+            <textarea id="message" rows="4" class="field mt-2" placeholder="Anything we should know about the vehicle?"></textarea>
+          </div>
+          <button type="submit" class="btn-primary w-full inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full text-sm font-semibold uppercase tracking-wider">
+            Send Enquiry <span class="bolt" style="background:#fff;"></span>
+          </button>
+          <p class="text-center text-brand-ink/55 text-sm">
+            Want to book a slot and add photos? <a href="booking.html" class="text-brand-blue font-semibold hover:underline">Use the full booking form →</a>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="bg-brand-ink text-white">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 py-16">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div class="lg:col-span-2">
+        <div class="bg-white inline-block rounded-xl p-3">
+          <img src="Assets/IMG_4336.jpg" alt="Charged Professional Detailing" class="h-12 w-auto" />
+        </div>
+        <p class="text-white/65 mt-6 max-w-sm leading-relaxed">
+          Premium car detailing built around precision, premium products and uncompromising standards. Your ride, our priority.
+        </p>
+        <div class="flex items-center gap-3 mt-6">
+          <a href="https://www.instagram.com/charged_detailing?igsh=bWczOXloY3dkN21r" target="_blank" rel="noopener" aria-label="Follow us on Instagram" class="w-11 h-11 rounded-full bg-white/10 hover:bg-brand-blue flex items-center justify-center text-white transition-colors">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 01-1.38-.9 3.7 3.7 0 01-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.21 15.58 2.2 15.2 2.2 12s0-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.21 8.8 2.2 12 2.2zm0 1.62c-3.15 0-3.52.01-4.76.07-.97.04-1.5.21-1.85.34-.46.18-.8.4-1.15.74-.34.35-.56.69-.74 1.15-.13.35-.3.88-.34 1.85-.06 1.24-.07 1.61-.07 4.76s.01 3.52.07 4.76c.04.97.21 1.5.34 1.85.18.46.4.8.74 1.15.35.34.69.56 1.15.74.35.13.88.3 1.85.34 1.24.06 1.61.07 4.76.07s3.52-.01 4.76-.07c.97-.04 1.5-.21 1.85-.34.46-.18.8-.4 1.15-.74.34-.35.56-.69.74-1.15.13-.35.3-.88.34-1.85.06-1.24.07-1.61.07-4.76s-.01-3.52-.07-4.76c-.04-.97-.21-1.5-.34-1.85a3.1 3.1 0 00-.74-1.15 3.1 3.1 0 00-1.15-.74c-.35-.13-.88-.3-1.85-.34-1.24-.06-1.61-.07-4.76-.07zm0 2.76a5.42 5.42 0 110 10.84 5.42 5.42 0 010-10.84zm0 1.62a3.8 3.8 0 100 7.6 3.8 3.8 0 000-7.6zm5.6-.29a1.27 1.27 0 11-2.54 0 1.27 1.27 0 012.54 0z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/share/1DtHmkfTw7/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Follow us on Facebook" class="w-11 h-11 rounded-full bg-white/10 hover:bg-brand-blue flex items-center justify-center text-white transition-colors">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.52 1.49-3.91 3.78-3.91 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.78-1.63 1.57v1.89h2.78l-.44 2.91h-2.34V22c4.78-.76 8.44-4.92 8.44-9.94z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="display uppercase text-sm tracking-widest text-brand-blue mb-4">Services</div>
+        <ul class="space-y-2 text-white/75 text-sm">
+          <li><a href="#services" class="hover:text-brand-blue transition-colors">Mini &amp; Full Detail</a></li>
+          <li><a href="#services" class="hover:text-brand-blue transition-colors">Stage 1–3 Correction</a></li>
+          <li><a href="#services" class="hover:text-brand-blue transition-colors">New Car Detail</a></li>
+          <li><a href="#services" class="hover:text-brand-blue transition-colors">Fleet &amp; Commercial</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="display uppercase text-sm tracking-widest text-brand-blue mb-4">Connect</div>
+        <ul class="space-y-2 text-white/75 text-sm">
+          <li><a href="booking.html" class="hover:text-brand-blue transition-colors">Book a Detail</a></li>
+          <li><a href="https://www.instagram.com/charged_detailing?igsh=bWczOXloY3dkN21r" target="_blank" rel="noopener" class="hover:text-brand-blue transition-colors">Instagram</a></li>
+          <li><a href="https://www.facebook.com/share/1DtHmkfTw7/?mibextid=wwXIfr" target="_blank" rel="noopener" class="hover:text-brand-blue transition-colors">Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-14 pt-8 border-t border-white/10 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between text-white/50 text-xs">
+      <div>© <span id="year"></span> Charged Professional Detailing. All rights reserved.</div>
+      <div class="flex items-center gap-2">Built with <span class="bolt"></span> Your ride, our priority.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Quick enquiry -> opens email to us with the details prefilled
+  function sendQuickEnquiry(e) {
+    e.preventDefault();
+    const f = e.target;
+    const get = id => (f.querySelector('#' + id)?.value || '').trim();
+    const body =
+      'Name: ' + get('name') + '\n' +
+      'Email: ' + get('email') + '\n' +
+      'Phone: ' + get('phone') + '\n' +
+      'Vehicle: ' + get('vehicle') + '\n' +
+      'Service: ' + get('service') + '\n\n' +
+      'Notes:\n' + get('message');
+    const subject = 'Detailing enquiry — ' + (get('name') || 'Website');
+    window.location.href = 'mailto:charged_detailing@outlook.com?subject=' +
+      encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  }
+  window.sendQuickEnquiry = sendQuickEnquiry;
+
+  // Mobile nav
+  const toggle = document.getElementById('navToggle');
+  const menu = document.getElementById('mobileMenu');
+  toggle?.addEventListener('click', () => menu.classList.toggle('hidden'));
+  menu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.add('hidden')));
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>

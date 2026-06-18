@@ -50,6 +50,16 @@ collections:
               - { label: "Saloon price", name: saloon, widget: string }
               - { label: "Estate / 4x4 price", name: estate, widget: string }
               - { label: "Van price", name: van, widget: string }
+          - label: "Availability (booking calendar)"
+            name: availability
+            widget: object
+            fields:
+              - { label: "Earliest booking — days' notice", name: leadDays, widget: number, value_type: int, min: 0, hint: "1 = customers can book from tomorrow" }
+              - { label: "How far ahead bookings open (months)", name: monthsAhead, widget: number, value_type: int, min: 1 }
+              - label: "Days off / fully booked"
+                name: blockedDates
+                widget: list
+                hint: "Type each date as YYYY-MM-DD (e.g. 2026-12-25) and press Enter. These days won't show as available."
           - label: "Add-ons"
             name: addons
             label_singular: "Add-on"

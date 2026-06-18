@@ -528,7 +528,7 @@ const CLOUDINARY_READY = !!(CLOUDINARY_CLOUD_NAME && CLOUDINARY_UPLOAD_PRESET);
      format "YYYY-MM-DD", each in quotes with a comma after.
    • Times are 24-hour ("HH:MM"). Days are 0=Sun,1=Mon,2=Tue ... 6=Sat.
      The page shows customers friendly times (9am, 1pm, 5pm…).               */
-const AVAILABILITY = {
+let AVAILABILITY = {
   leadDays:    1,                       // earliest booking = tomorrow
   monthsAhead: 3,                       // how far ahead customers can book
   rotationAnchorMonday: "2026-06-01",   // this Monday is a DAYS week
@@ -559,7 +559,7 @@ const AVAILABILITY = {
 };
 
 /* Services offered (edit freely) */
-const SERVICES = [
+let SERVICES = [
   "Mini Detail — from £30",
   "Full Detail — from £50",
   "Stage 1 Protection Detail — from £150",
@@ -573,7 +573,7 @@ const SERVICES = [
 ];
 
 /* Add-ons (cheapest → most expensive) */
-const ADDONS = [
+let ADDONS = [
   "Screen Wash Top Up — £10",
   "Child Car Seat Clean — £15",
   "Engine Bay Detail — £20",
@@ -618,6 +618,7 @@ const EXTERIOR_CONDITIONS = [
    ===================================================================== */
 function esc(s){ return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 
+function renderServices(){
 document.getElementById('servicesGrid').innerHTML = SERVICES.map((s, i) => `
   <label class="opt">
     <input type="checkbox" name="services" value="${esc(s)}">
@@ -628,7 +629,10 @@ document.getElementById('servicesGrid').innerHTML = SERVICES.map((s, i) => `
       <span class="font-semibold text-sm">${esc(s)}</span>
     </div>
   </label>`).join('');
+}
+renderServices();
 
+function renderAddons(){
 document.getElementById('addonsGrid').innerHTML = ADDONS.map(a => `
   <label class="flex items-center gap-3 py-2.5 border-b border-black/5 cursor-pointer group">
     <input type="checkbox" name="addons" value="${esc(a)}" class="peer sr-only">
@@ -637,6 +641,8 @@ document.getElementById('addonsGrid').innerHTML = ADDONS.map(a => `
     </span>
     <span class="text-sm text-brand-ink/80 group-hover:text-brand-ink">${esc(a)}</span>
   </label>`).join('');
+}
+renderAddons();
 
 function conditionCard(group, c){
   return `
@@ -669,8 +675,12 @@ let selectedDate = null;   // 'YYYY-MM-DD'
 let selectedTime = null;
 
 const today = new Date(); today.setHours(0,0,0,0);
-const minDate = new Date(today); minDate.setDate(minDate.getDate() + AVAILABILITY.leadDays);
-const maxDate = new Date(today); maxDate.setMonth(maxDate.getMonth() + AVAILABILITY.monthsAhead);
+let minDate, maxDate;
+function recomputeBounds(){
+  minDate = new Date(today); minDate.setDate(minDate.getDate() + AVAILABILITY.leadDays);
+  maxDate = new Date(today); maxDate.setMonth(maxDate.getMonth() + AVAILABILITY.monthsAhead);
+}
+recomputeBounds();
 
 function fmt(d){ return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); }
 
@@ -870,7 +880,7 @@ if (!WEB3FORMS_ACCESS_KEY) document.getElementById('setupNotice').classList.remo
 function showErr(id, show){ document.getElementById(id).classList.toggle('hidden', !show); }
 
 /* ---- Live price estimate ---- */
-const PACKAGE_PRICES = {
+let PACKAGE_PRICES = {
   "Mini Detail — from £30":                [30, 40, 50, 80],
   "Full Detail — from £50":                [50, 60, 70, 90],
   "Stage 1 Protection Detail — from £150": [150,180,220,250],
@@ -1109,6 +1119,62 @@ function onSuccess(services, addons, photosDropped){
 }
 
 document.getElementById('year').textContent = new Date().getFullYear();
+
+/* =====================================================================
+   LIVE CONTENT — keep prices, services, add-ons & days-off in sync with /admin
+   ===================================================================== */
+(function loadBookingContent(){
+  fetch('/content/content.json', { cache: 'no-store' })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (c) {
+      if (!c) return;
+      var num = function (v) { var m = String(v == null ? '' : v).match(/(\d+(?:\.\d+)?)/); return m ? Math.round(parseFloat(m[1])) : 0; };
+
+      if (Array.isArray(c.packages) && c.packages.length) {
+        SERVICES = c.packages.map(function (p) { return p.name + ' \u2014 from \u00a3' + num(p.hatchback); })
+          .concat(['Maintenance Plan \u2014 enquire', 'Fleet & Commercial \u2014 enquire', 'Pre-Sale Prep \u2014 enquire', 'Not sure \u2014 please advise']);
+        PACKAGE_PRICES = {};
+        c.packages.forEach(function (p) {
+          PACKAGE_PRICES[p.name + ' \u2014 from \u00a3' + num(p.hatchback)] = [num(p.hatchback), num(p.saloon), num(p.estate), num(p.van)];
+        });
+        renderServices();
+      }
+
+      if (Array.isArray(c.addons) && c.addons.length) {
+        ADDONS = c.addons.map(function (a) { return a.name + ' \u2014 ' + a.price; });
+        renderAddons();
+      }
+
+      if (c.availability) {
+        if (c.availability.leadDays != null) AVAILABILITY.leadDays = c.availability.leadDays;
+        if (c.availability.monthsAhead != null) AVAILABILITY.monthsAhead = c.availability.monthsAhead;
+        if (Array.isArray(c.availability.blockedDates)) {
+          AVAILABILITY.blockedDates = c.availability.blockedDates
+            .map(function (d) { return typeof d === 'string' ? d : (d && d.date) || ''; })
+            .filter(Boolean);
+        }
+        recomputeBounds();
+        renderCalendar();
+      }
+
+      updateEstimate();
+
+      // keep call / WhatsApp / email links in sync too
+      if (c.site) {
+        var digits = c.site.phoneDigits ? String(c.site.phoneDigits).replace(/\D/g, '') : '';
+        if (digits) {
+          document.querySelectorAll('a[href^="tel:"]').forEach(function (a) { a.href = 'tel:+' + digits; });
+          document.querySelectorAll('a[href*="wa.me"]').forEach(function (a) {
+            var t = ''; try { t = new URL(a.href).searchParams.get('text') || ''; } catch (e) {}
+            a.href = 'https://wa.me/' + digits + (t ? ('?text=' + encodeURIComponent(t)) : '');
+          });
+        }
+        if (c.site.email) document.querySelectorAll('a[href^="mailto:"]').forEach(function (a) { a.href = 'mailto:' + c.site.email; });
+      }
+    })
+    .catch(function () {});
+})();
+
 </script>
 </body>
 </html>

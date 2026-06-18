@@ -204,5 +204,10 @@
       "image": "/Assets/ba-exhaust.jpg",
       "caption": "Exhaust Tips"
     }
-  ]
+  ],
+  "availability": {
+    "leadDays": 1,
+    "monthsAhead": 3,
+    "blockedDates": []
+  }
 }

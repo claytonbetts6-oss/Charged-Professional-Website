@@ -1,0 +1,6 @@
+# Static site (no build) + serverless function for the CMS GitHub login
+[build]
+  publish = "."
+
+[functions]
+  directory = "netlify/functions"

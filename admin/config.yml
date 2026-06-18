@@ -1,0 +1,23 @@
+backend:
+  name: github
+  repo: claytonbetts6-oss/Charged-Professional-Website
+  branch: main
+  base_url: https://chargedprofessionaldetailing.co.uk
+  auth_endpoint: .netlify/functions/oauth
+
+# Where uploaded photos are stored / referenced from
+media_folder: "Assets"
+public_folder: "/Assets"
+
+# Edits are committed straight to the live site
+publish_mode: simple
+
+collections:
+  - name: settings
+    label: "Site Settings"
+    files:
+      - name: homepage
+        label: "Homepage"
+        file: "content/site.json"
+        fields:
+          - { label: "Star rating (e.g. 4.7★)", name: "rating", widget: "string" }

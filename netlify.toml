@@ -4,3 +4,19 @@
 
 [functions]
   directory = "netlify/functions"
+
+# Always serve the latest editor config + content (never cache these)
+[[headers]]
+  for = "/admin/config.yml"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+[[headers]]
+  for = "/admin/index.html"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+[[headers]]
+  for = "/content/content.json"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"

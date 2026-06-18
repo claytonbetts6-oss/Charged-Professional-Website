@@ -5,19 +5,71 @@ backend:
   base_url: https://chargedprofessionaldetailing.co.uk
   auth_endpoint: .netlify/functions/oauth
 
-# Where uploaded photos are stored / referenced from
 media_folder: "Assets"
 public_folder: "/Assets"
 
-# Edits are committed straight to the live site
-publish_mode: simple
-
 collections:
-  - name: settings
-    label: "Site Settings"
+  - name: content
+    label: "Website Content"
     files:
       - name: homepage
-        label: "Homepage"
-        file: "content/site.json"
+        label: "Homepage, Pricing & Photos"
+        file: "content/content.json"
         fields:
-          - { label: "Star rating (e.g. 4.7★)", name: "rating", widget: "string" }
+          - label: "Hero & Stats"
+            name: site
+            widget: object
+            fields:
+              - { label: "Small heading (eyebrow)", name: heroEyebrow, widget: string }
+              - { label: "Big heading – line 1", name: heroLine1, widget: string }
+              - { label: "Big heading – line 2", name: heroLine2, widget: string }
+              - { label: "Intro paragraph", name: heroParagraph, widget: text }
+              - { label: "Stat – vehicles detailed (number)", name: statVehicles, widget: string }
+              - { label: "Stat – star rating", name: rating, widget: string }
+              - { label: "Stat – satisfaction (number)", name: statSatisfaction, widget: string }
+              - { label: "Phone number (shown on site)", name: phoneDisplay, widget: string }
+              - { label: "Phone number (digits for call/WhatsApp)", name: phoneDigits, widget: string, hint: "International format, no spaces or +, e.g. 447709519480" }
+              - { label: "Email address", name: email, widget: string }
+          - label: "About Me section"
+            name: about
+            widget: object
+            fields:
+              - { label: "Intro", name: intro, widget: text, hint: "Leave a blank line between paragraphs" }
+              - { label: "My Standards", name: standards, widget: text }
+              - { label: "My Philosophy", name: philosophy, widget: text }
+              - { label: "My Promise", name: promise, widget: text }
+          - label: "Packages & Prices"
+            name: packages
+            label_singular: "Package"
+            widget: list
+            summary: "{{fields.name}}"
+            fields:
+              - { label: "Package name", name: name, widget: string }
+              - { label: "Description", name: desc, widget: text }
+              - { label: "Hatchback price", name: hatchback, widget: string }
+              - { label: "Saloon price", name: saloon, widget: string }
+              - { label: "Estate / 4x4 price", name: estate, widget: string }
+              - { label: "Van price", name: van, widget: string }
+          - label: "Add-ons"
+            name: addons
+            label_singular: "Add-on"
+            widget: list
+            summary: "{{fields.name}} — {{fields.price}}"
+            fields:
+              - { label: "Name", name: name, widget: string }
+              - { label: "Price", name: price, widget: string }
+          - label: "Recently Charged (gallery photos)"
+            name: recentlyCharged
+            label_singular: "Photo"
+            widget: list
+            fields:
+              - { label: "Photo", name: image, widget: image }
+              - { label: "Description (for accessibility)", name: alt, widget: string, required: false }
+          - label: "Before & After photos"
+            name: beforeAfter
+            label_singular: "Before/After"
+            widget: list
+            summary: "{{fields.caption}}"
+            fields:
+              - { label: "Photo (before | after side by side)", name: image, widget: image }
+              - { label: "Caption", name: caption, widget: string }

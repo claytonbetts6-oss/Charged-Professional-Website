@@ -243,13 +243,13 @@
     <div class="max-w-3xl">
       <div class="flex items-center gap-3 mb-6">
         <span class="bolt"></span>
-        <span class="eyebrow text-white/90">Premium Mobile Detailing</span>
+        <span class="eyebrow text-white/90" data-cms="heroEyebrow">Premium Mobile Detailing</span>
       </div>
       <h1 class="display text-white text-[56px] leading-[1.08] sm:text-[88px] sm:leading-[1.04] uppercase">
-        <span class="block pb-1">Your Ride,</span>
-        <span class="block text-brand-blue">Is Our Priority</span>
+        <span class="block pb-1" data-cms="heroLine1">Your Ride,</span>
+        <span class="block text-brand-blue" data-cms="heroLine2">Is Our Priority</span>
       </h1>
-      <p class="text-white/80 text-lg sm:text-xl mt-7 max-w-xl leading-relaxed">
+      <p class="text-white/80 text-lg sm:text-xl mt-7 max-w-xl leading-relaxed" data-cms="heroParagraph">
         Charged Professional Detailing brings showroom-grade finishes to every vehicle — meticulous interiors, mirror-deep paint, and a service experience built around your time.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 mt-9">
@@ -262,7 +262,7 @@
       </div>
       <div class="mt-14 grid grid-cols-3 gap-6 sm:gap-10 max-w-lg">
         <div>
-          <div class="display text-3xl sm:text-4xl text-white">100<span class="text-brand-blue">+</span></div>
+          <div class="display text-3xl sm:text-4xl text-white"><span data-cms="statVehicles">100</span><span class="text-brand-blue">+</span></div>
           <div class="text-white/70 text-xs sm:text-sm mt-1 uppercase tracking-wider">Vehicles Detailed</div>
         </div>
         <div>
@@ -270,7 +270,7 @@
           <div class="text-white/70 text-xs sm:text-sm mt-1 uppercase tracking-wider">Customer Rated</div>
         </div>
         <div>
-          <div class="display text-3xl sm:text-4xl text-white">100<span class="text-brand-blue">%</span></div>
+          <div class="display text-3xl sm:text-4xl text-white"><span data-cms="statSatisfaction">100</span><span class="text-brand-blue">%</span></div>
           <div class="text-white/70 text-xs sm:text-sm mt-1 uppercase tracking-wider">Satisfaction</div>
         </div>
       </div>
@@ -319,7 +319,7 @@
         <span class="eyebrow" style="font-size:15px;">Detail Packages</span>
       </div>
       <!-- Desktop pricing table -->
-      <div class="hidden lg:block bg-white border border-black/5 rounded-2xl shadow-soft overflow-hidden">
+      <div id="pricingDesktop" class="hidden lg:block bg-white border border-black/5 rounded-2xl shadow-soft overflow-hidden">
       <div class="grid grid-cols-[1.9fr_repeat(4,1fr)] items-center bg-brand-ink text-white">
         <div class="px-7 py-4 text-xs uppercase tracking-widest text-white/60">Package</div>
         <div class="px-3 py-4 text-center text-xs uppercase tracking-widest text-white/85">Hatchback</div>
@@ -389,7 +389,7 @@
       </div>
       </div>
       <!-- Mobile pricing cards -->
-      <div class="lg:hidden space-y-4">
+      <div id="pricingMobile" class="lg:hidden space-y-4">
       <div class="bg-white border border-black/5 rounded-2xl shadow-soft p-5">
         <h3 class="display text-lg uppercase">Mini Detail</h3>
         <p class="text-brand-ink/60 text-sm mt-1 leading-relaxed">A mini valet is a basic service with exterior washing OR interior vacuuming and surface wiping, excluding deeper cleaning services — wet-vac upholstery and carpets, interior protection, polishing etc.</p>
@@ -563,7 +563,7 @@
         <span class="eyebrow">Add-Ons</span>
       </div>
       <div class="bg-white border border-black/5 rounded-2xl shadow-soft p-6 sm:p-8">
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10">
+        <div id="addonsList" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10">
           <div class="flex items-baseline justify-between gap-3 py-3 border-b border-black/5">
             <span class="text-brand-ink/80 text-sm">Screen Wash Top Up</span>
             <span class="display text-brand-blue text-sm whitespace-nowrap">£10</span>
@@ -727,7 +727,7 @@
         <h2 class="display text-5xl sm:text-6xl uppercase leading-[0.95] mb-6">
           Meet <span class="text-brand-blue">Elton</span>
         </h2>
-        <div class="space-y-4 text-brand-ink/75 leading-relaxed text-[15px] sm:text-base">
+        <div id="aboutIntro" class="space-y-4 text-brand-ink/75 leading-relaxed text-[15px] sm:text-base">
           <p>Hi, I'm Elton, the founder and detailer behind Charged Professional Detailing.</p>
           <p>Based in Rotherham and Sheffield, I provide professional mobile detailing services throughout South Yorkshire and beyond, with the flexibility to travel wherever my customers need me.</p>
           <p>My journey into detailing began unexpectedly after restoring and using an old pressure washer that had been thrown away. What started as simply cleaning my own vehicle quickly developed into a genuine passion for vehicle care and presentation, eventually becoming the foundation for Charged Professional Detailing.</p>
@@ -735,20 +735,20 @@
         </div>
 
         <h3 class="display text-2xl uppercase mt-10 mb-3">My Standards</h3>
-        <div class="space-y-4 text-brand-ink/75 leading-relaxed text-[15px] sm:text-base">
+        <div id="aboutStandards" class="space-y-4 text-brand-ink/75 leading-relaxed text-[15px] sm:text-base">
           <p>I believe that exceptional results come from doing things properly. That's why I've invested in professional training and am accredited to carry out machine polishing using a Dual Action (DA) polisher, ensuring paintwork enhancement and correction is completed using safe, proven techniques.</p>
           <p>Every vehicle is treated using professional-grade equipment, carefully selected products, and safe wash methods designed to deliver effective, non-damaging results. From routine maintenance details to more advanced interior and exterior services, every stage of the process is carried out with precision, consistency, and control.</p>
           <p>I understand that handing someone the keys to your vehicle requires trust. That's why I approach every job with the same professionalism and care that I'd expect if I were leaving my own vehicle in someone else's hands.</p>
         </div>
 
         <h3 class="display text-2xl uppercase mt-10 mb-3">My Philosophy</h3>
-        <div class="space-y-4 text-brand-ink/75 leading-relaxed text-[15px] sm:text-base">
+        <div id="aboutPhilosophy" class="space-y-4 text-brand-ink/75 leading-relaxed text-[15px] sm:text-base">
           <p>My philosophy is simple: never rush, never cut corners, and never settle for “good enough.” Exceptional results are built through patience, precision, and attention to the smallest details.</p>
           <p>Continuous improvement is also part of the standard. I am always developing my skills, refining my techniques, and investing in better processes to ensure every customer receives the highest level of workmanship possible.</p>
         </div>
 
         <h3 class="display text-2xl uppercase mt-10 mb-3">My Promise</h3>
-        <div class="space-y-4 text-brand-ink/75 leading-relaxed text-[15px] sm:text-base">
+        <div id="aboutPromise" class="space-y-4 text-brand-ink/75 leading-relaxed text-[15px] sm:text-base">
           <p>Whether it's a daily driver, a family SUV, a weekend toy, or a hardworking van, every vehicle receives the same meticulous approach and professional care.</p>
           <p>Because at Charged Professional Detailing, <span class="text-brand-ink font-semibold">Your Ride Is Our Priority.</span></p>
         </div>
@@ -777,7 +777,7 @@
       </p>
     </div>
 
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+    <div id="baGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
       <div class="reveal">
         <div class="rounded-2xl overflow-hidden shadow-soft relative bg-brand-ink/5">
           <span class="absolute top-3 left-3 z-10 bg-brand-blue text-white display uppercase tracking-wider text-[11px] px-3 py-1.5 rounded-full">Before → After</span>
@@ -845,7 +845,7 @@
       </p>
     </div>
 
-    <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+    <div id="galleryGrid" class="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
       <div class="gallery-img reveal">
         <img src="Assets/rc-bmw-mint.jpg" alt="Mint green BMW after detail" class="w-full h-full object-cover aspect-[4/5] block" />
       </div>
@@ -1082,15 +1082,8 @@
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  // Editable content (managed in /admin). Falls back to the built-in values if unavailable.
-  fetch('/content/site.json', { cache: 'no-store' })
-    .then(r => r.ok ? r.json() : null)
-    .then(d => {
-      if (!d) return;
-      if (d.rating) { const el = document.querySelector('[data-cms="rating"]'); if (el) el.textContent = d.rating; }
-    })
-    .catch(() => {});
 </script>
+<script src="/content.js"></script>
 
 </body>
 </html>

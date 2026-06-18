@@ -1,0 +1,208 @@
+{
+  "site": {
+    "heroEyebrow": "Premium Mobile Detailing",
+    "heroLine1": "Your Ride,",
+    "heroLine2": "Is Our Priority",
+    "heroParagraph": "Charged Professional Detailing brings showroom-grade finishes to every vehicle — meticulous interiors, mirror-deep paint, and a service experience built around your time.",
+    "statVehicles": "100",
+    "rating": "4.7★",
+    "statSatisfaction": "100",
+    "phoneDisplay": "07709 519480",
+    "phoneDigits": "447709519480",
+    "email": "charged_detailing@outlook.com"
+  },
+  "about": {
+    "intro": "Hi, I'm Elton, the founder and detailer behind Charged Professional Detailing.\n\nBased in Rotherham and Sheffield, I provide professional mobile detailing services throughout South Yorkshire and beyond, with the flexibility to travel wherever my customers need me.\n\nMy journey into detailing began unexpectedly after restoring and using an old pressure washer that had been thrown away. What started as simply cleaning my own vehicle quickly developed into a genuine passion for vehicle care and presentation, eventually becoming the foundation for Charged Professional Detailing.\n\nToday, that same passion drives every service I provide. Whether it's a daily driver, a family SUV, a weekend show car, or a hardworking van, every vehicle is treated with the same level of care and attention as if it were my own.",
+    "standards": "I believe that exceptional results come from doing things properly. That's why I've invested in professional training and am accredited to carry out machine polishing using a Dual Action (DA) polisher, ensuring paintwork enhancement and correction is completed using safe, proven techniques.\n\nEvery vehicle is treated using professional-grade equipment, carefully selected products, and safe wash methods designed to deliver effective, non-damaging results. From routine maintenance details to more advanced interior and exterior services, every stage of the process is carried out with precision, consistency, and control.\n\nI understand that handing someone the keys to your vehicle requires trust. That's why I approach every job with the same professionalism and care that I'd expect if I were leaving my own vehicle in someone else's hands.",
+    "philosophy": "My philosophy is simple: never rush, never cut corners, and never settle for \"good enough.\" Exceptional results are built through patience, precision, and attention to the smallest details.\n\nContinuous improvement is also part of the standard. I am always developing my skills, refining my techniques, and investing in better processes to ensure every customer receives the highest level of workmanship possible.",
+    "promise": "Whether it's a daily driver, a family SUV, a weekend toy, or a hardworking van, every vehicle receives the same meticulous approach and professional care.\n\nBecause at Charged Professional Detailing, Your Ride Is Our Priority."
+  },
+  "packages": [
+    {
+      "name": "Mini Detail",
+      "desc": "A mini valet is a basic service with exterior washing OR interior vacuuming and surface wiping, excluding deeper cleaning services — wet-vac upholstery and carpets, interior protection, polishing etc.",
+      "hatchback": "£30.00",
+      "saloon": "£40.00",
+      "estate": "£50.00",
+      "van": "£80.00"
+    },
+    {
+      "name": "Full Detail",
+      "desc": "A full detail is a basic car cleaning service with exterior washing, interior vacuuming and surface wiping, excluding deeper cleaning services — wet-vac upholstery and carpets, interior protection, polishing etc.",
+      "hatchback": "£50.00",
+      "saloon": "£60.00",
+      "estate": "£70.00",
+      "van": "£90.00"
+    },
+    {
+      "name": "Stage 1 Protection Detail",
+      "desc": "Full vehicle decontamination including wheels, door shuts and logos, full citrus snow foam pre-wash, pressure washed, PH neutral snow foam two bucket wash method with shampoo, pressure washed, tar and iron deposits chemically removed, clay bar and lubricant to remove fine hidden contaminants on the paintwork and glass, cleaning panel wipes to remove any remaining oils, followed by a single stage machine polish and coated with your chosen protection (sealant or wax).",
+      "hatchback": "£150.00",
+      "saloon": "£180.00",
+      "estate": "£220.00",
+      "van": "£250.00"
+    },
+    {
+      "name": "Stage 2 Correction Detail",
+      "desc": "All plastic trims, headlights, badges, door handles and shuts are masked off to ensure no damage is caused whilst polishing. Level 1 — a medium cutting process is performed to remove swirls, scratches and defects. Bodywork is then wiped down using microfibre towels to remove dust particles from the first polishing process. Level 2 — a machine polish is then performed using fine compound to refine the paintwork, removing swirls/small imperfections on the glass and paint, and then coated with your chosen protection (sealant, wax or ceramic coating) — prices vary on protection.",
+      "hatchback": "£220.00",
+      "saloon": "£250.00",
+      "estate": "£270.00",
+      "van": "£290.00"
+    },
+    {
+      "name": "Stage 3 Enhancement Detail",
+      "desc": "Level 1 — a medium cutting process is performed to remove deeper scratches and defects. Bodywork is then wiped down using microfibre towels to remove dust particles from the first polishing process. Level 2 — a machine polish is then performed using fine compounds to refine the paintwork, removing swirl marks and leaving a mirror finish. Level 3 — a machine polish to enhance the paintwork, leaving a clear and smooth glass-like finish on the glass and paint, and then coated with your chosen protection (sealant, wax or ceramic coating) — prices vary on protection.",
+      "hatchback": "£300.00",
+      "saloon": "£350.00",
+      "estate": "£400.00",
+      "van": "£450.00"
+    },
+    {
+      "name": "New Car Detail",
+      "desc": "All services provided.",
+      "hatchback": "£500.00",
+      "saloon": "£550.00",
+      "estate": "£600.00",
+      "van": "£650.00"
+    }
+  ],
+  "addons": [
+    {
+      "name": "Screen Wash Top Up",
+      "price": "£10"
+    },
+    {
+      "name": "Child Car Seat Clean",
+      "price": "£15"
+    },
+    {
+      "name": "Engine Bay Detail",
+      "price": "£20"
+    },
+    {
+      "name": "Interior Wet Vac",
+      "price": "£20"
+    },
+    {
+      "name": "Interior Hydrophobic Protection",
+      "price": "£20"
+    },
+    {
+      "name": "Rust Removal",
+      "price": "£20"
+    },
+    {
+      "name": "Windshield / Glass Coating",
+      "price": "£20"
+    },
+    {
+      "name": "Head Liner Detail",
+      "price": "£20"
+    },
+    {
+      "name": "Trim Restoration",
+      "price": "£20"
+    },
+    {
+      "name": "Pet Hair Removal",
+      "price": "£20"
+    },
+    {
+      "name": "Mould Removal",
+      "price": "£30"
+    },
+    {
+      "name": "Exterior Chrome Polish",
+      "price": "£30"
+    },
+    {
+      "name": "Alloy Removal & Deep Clean",
+      "price": "£40"
+    },
+    {
+      "name": "Emblem Removal / Replacement",
+      "price": "£40"
+    },
+    {
+      "name": "Glass Machine Polish",
+      "price": "£50"
+    },
+    {
+      "name": "Seat Removal & Deep Clean",
+      "price": "£50"
+    },
+    {
+      "name": "Leather Coating",
+      "price": "£50"
+    },
+    {
+      "name": "Headlight Restoration",
+      "price": "£60"
+    },
+    {
+      "name": "Interior Machine Polish",
+      "price": "£60"
+    },
+    {
+      "name": "Alloy Polish & Protection",
+      "price": "£100"
+    },
+    {
+      "name": "Brake Calliper Respray",
+      "price": "£100"
+    }
+  ],
+  "recentlyCharged": [
+    {
+      "image": "/Assets/rc-bmw-mint.jpg",
+      "alt": "Mint green BMW after detail"
+    },
+    {
+      "image": "/Assets/rc-velar.jpg",
+      "alt": "White Range Rover Velar after detail"
+    },
+    {
+      "image": "/Assets/rc-bmw-silver.jpg",
+      "alt": "Silver BMW after detail"
+    },
+    {
+      "image": "/Assets/rc-mercedes.jpg",
+      "alt": "Black Mercedes after detail"
+    },
+    {
+      "image": "/Assets/rc-audi.jpg",
+      "alt": "Black Audi after detail"
+    },
+    {
+      "image": "/Assets/rc-puma.jpg",
+      "alt": "Silver Ford Puma after detail"
+    }
+  ],
+  "beforeAfter": [
+    {
+      "image": "/Assets/ba-dashboard.jpg",
+      "caption": "Dashboard & Console"
+    },
+    {
+      "image": "/Assets/ba-seats.jpg",
+      "caption": "Seats & Upholstery"
+    },
+    {
+      "image": "/Assets/ba-van-footwell.jpg",
+      "caption": "Footwell & Mats"
+    },
+    {
+      "image": "/Assets/ba-seat.jpg",
+      "caption": "Seat & Carpet"
+    },
+    {
+      "image": "/Assets/ba-wheel.jpg",
+      "caption": "Wheels & Arches"
+    },
+    {
+      "image": "/Assets/ba-exhaust.jpg",
+      "caption": "Exhaust Tips"
+    }
+  ]
+}

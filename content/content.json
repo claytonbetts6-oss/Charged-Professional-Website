@@ -1,15 +1,15 @@
 {
   "site": {
-    "heroEyebrow": "Premium Mobile Detailing",
+    "statSatisfaction": "100",
     "heroLine1": "Your Ride,",
     "heroLine2": "Is Our Priority",
+    "heroEyebrow": "Premium Mobile Detailing",
     "heroParagraph": "Charged Professional Detailing brings showroom-grade finishes to every vehicle — meticulous interiors, mirror-deep paint, and a service experience built around your time.",
-    "statVehicles": "100",
-    "rating": "4.9★",
-    "statSatisfaction": "100",
     "phoneDisplay": "07709 519480",
     "phoneDigits": "447709519480",
-    "email": "charged_detailing@outlook.com"
+    "statVehicles": "100",
+    "email": "charged_detailing@outlook.com",
+    "rating": "4.9★"
   },
   "about": {
     "intro": "Hi, I'm Elton, the founder and detailer behind Charged Professional Detailing.\n\nBased in Rotherham and Sheffield, I provide professional mobile detailing services throughout South Yorkshire and beyond, with the flexibility to travel wherever my customers need me.\n\nMy journey into detailing began unexpectedly after restoring and using an old pressure washer that had been thrown away. What started as simply cleaning my own vehicle quickly developed into a genuine passion for vehicle care and presentation, eventually becoming the foundation for Charged Professional Detailing.\n\nToday, that same passion drives every service I provide. Whether it's a daily driver, a family SUV, a weekend show car, or a hardworking van, every vehicle is treated with the same level of care and attention as if it were my own.",
@@ -208,6 +208,8 @@
   "availability": {
     "leadDays": 1,
     "monthsAhead": 3,
-    "blockedDates": []
+    "blockedDates": [
+      "2000-06-21"
+    ]
   }
 }

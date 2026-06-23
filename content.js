@@ -71,14 +71,14 @@
     if (!pkgs.length) return;
     var d = document.getElementById('pricingDesktop');
     if (d) {
-      var h = '<div class="grid grid-cols-[1.9fr_repeat(4,1fr)] items-center bg-brand-ink text-white">' +
+      var h = '<div class="grid items-center bg-brand-ink text-white" style="grid-template-columns:1.9fr repeat(4,1fr)">' +
         '<div class="px-7 py-4 text-xs uppercase tracking-widest text-white/60">Package</div>' +
         '<div class="px-3 py-4 text-center text-xs uppercase tracking-widest text-white/85">Hatchback</div>' +
         '<div class="px-3 py-4 text-center text-xs uppercase tracking-widest text-white/85">Saloon</div>' +
         '<div class="px-3 py-4 text-center text-xs uppercase tracking-widest text-white/85">Estate / 4×4</div>' +
         '<div class="px-3 py-4 text-center text-xs uppercase tracking-widest text-white/85">Van</div>';
       pkgs.forEach(function (p) {
-        h += '<div class="grid grid-cols-[1.9fr_repeat(4,1fr)] items-center border-t border-black/5 hover:bg-brand-mist transition-colors">' +
+        h += '<div class="grid items-center border-t border-black/5 hover:bg-brand-mist transition-colors" style="grid-template-columns:1.9fr repeat(4,1fr)">' +
           '<div class="px-7 py-5"><h3 class="display text-xl uppercase">' + esc(p.name) + '</h3>' +
           '<p class="text-brand-ink/60 text-sm mt-1 leading-relaxed">' + esc(p.desc) + '</p></div>' +
           priceCell(p.hatchback) + priceCell(p.saloon) + priceCell(p.estate) + priceCell(p.van) + '</div>';

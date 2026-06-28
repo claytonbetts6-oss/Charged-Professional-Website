@@ -1131,18 +1131,20 @@ document.getElementById('year').textContent = new Date().getFullYear();
       var num = function (v) { var m = String(v == null ? '' : v).match(/(\d+(?:\.\d+)?)/); return m ? Math.round(parseFloat(m[1])) : 0; };
 
       if (Array.isArray(c.packages) && c.packages.length) {
-        SERVICES = c.packages.map(function (p) { return p.name + ' \u2014 from \u00a3' + num(p.hatchback); })
+        var newServices = c.packages.map(function (p) { return p.name + ' \u2014 from \u00a3' + num(p.hatchback); })
           .concat(['Maintenance Plan \u2014 enquire', 'Fleet & Commercial \u2014 enquire', 'Pre-Sale Prep \u2014 enquire', 'Not sure \u2014 please advise']);
         PACKAGE_PRICES = {};
         c.packages.forEach(function (p) {
           PACKAGE_PRICES[p.name + ' \u2014 from \u00a3' + num(p.hatchback)] = [num(p.hatchback), num(p.saloon), num(p.estate), num(p.van)];
         });
-        renderServices();
+        // Only re-render if the list actually changed (re-rendering relies on the
+        // Tailwind CDN, which won't re-style late DOM updates \u2014 so avoid it otherwise).
+        if (JSON.stringify(newServices) !== JSON.stringify(SERVICES)) { SERVICES = newServices; renderServices(); }
       }
 
       if (Array.isArray(c.addons) && c.addons.length) {
-        ADDONS = c.addons.map(function (a) { return a.name + ' \u2014 ' + a.price; });
-        renderAddons();
+        var newAddons = c.addons.map(function (a) { return a.name + ' \u2014 ' + a.price; });
+        if (JSON.stringify(newAddons) !== JSON.stringify(ADDONS)) { ADDONS = newAddons; renderAddons(); }
       }
 
       if (c.availability) {

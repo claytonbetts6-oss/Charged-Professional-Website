@@ -1,6 +1,7 @@
-/* Loads editable content from /content/content.json (managed in /admin)
-   and applies it to the homepage. If anything fails, the built-in HTML
-   stays exactly as it is, so the site never breaks. */
+/* Loads editable content from /content/content.json (managed in /admin) and
+   applies it to the homepage by UPDATING the existing, already-styled elements
+   in place (text / image / links) — never rebuilding them. This keeps all the
+   original styling intact. If anything fails, the built-in HTML stays as-is. */
 (function () {
   fetch('/content/content.json', { cache: 'no-store' })
     .then(function (r) { return r.ok ? r.json() : null; })
@@ -35,10 +36,10 @@
     setText('email', s.email);
     rewriteContact(s);
     renderAbout(c.about || {});
-    renderPricing(c.packages || []);
-    renderAddons(c.addons || []);
-    renderGallery(c.recentlyCharged || []);
-    renderBeforeAfter(c.beforeAfter || []);
+    updatePricing(c.packages || []);
+    updateAddons(c.addons || []);
+    updateImages('galleryGrid', c.recentlyCharged || [], false);
+    updateImages('baGrid', c.beforeAfter || [], true);
   }
 
   function rewriteContact(s) {
@@ -56,6 +57,7 @@
     }
   }
 
+  // About paragraphs are plain <p> (no Tailwind utilities) so this is safe.
   function renderAbout(a) {
     var map = { aboutIntro: a.intro, aboutStandards: a.standards, aboutPhilosophy: a.philosophy, aboutPromise: a.promise };
     Object.keys(map).forEach(function (id) {
@@ -64,72 +66,76 @@
     });
   }
 
-  function priceCell(v) {
-    return '<div class="px-3 py-5 text-center display text-brand-blue text-lg">' + esc(v) + '</div>';
-  }
-  function renderPricing(pkgs) {
-    if (!pkgs.length) return;
+  function show(el, visible) { if (el) el.style.display = visible ? '' : 'none'; }
+
+  function updatePricing(pkgs) {
+    // Desktop table: children = [header, row0, row1, ...]
     var d = document.getElementById('pricingDesktop');
     if (d) {
-      var h = '<div class="grid items-center bg-brand-ink text-white" style="grid-template-columns:1.9fr repeat(4,1fr)">' +
-        '<div class="px-7 py-4 text-xs uppercase tracking-widest text-white/60">Package</div>' +
-        '<div class="px-3 py-4 text-center text-xs uppercase tracking-widest text-white/85">Hatchback</div>' +
-        '<div class="px-3 py-4 text-center text-xs uppercase tracking-widest text-white/85">Saloon</div>' +
-        '<div class="px-3 py-4 text-center text-xs uppercase tracking-widest text-white/85">Estate / 4×4</div>' +
-        '<div class="px-3 py-4 text-center text-xs uppercase tracking-widest text-white/85">Van</div>';
-      pkgs.forEach(function (p) {
-        h += '<div class="grid items-center border-t border-black/5 hover:bg-brand-mist transition-colors" style="grid-template-columns:1.9fr repeat(4,1fr)">' +
-          '<div class="px-7 py-5"><h3 class="display text-xl uppercase">' + esc(p.name) + '</h3>' +
-          '<p class="text-brand-ink/60 text-sm mt-1 leading-relaxed">' + esc(p.desc) + '</p></div>' +
-          priceCell(p.hatchback) + priceCell(p.saloon) + priceCell(p.estate) + priceCell(p.van) + '</div>';
-      });
-      d.innerHTML = h;
+      var rows = d.children;
+      for (var i = 1; i < rows.length; i++) {
+        var p = pkgs[i - 1];
+        if (!p) { show(rows[i], false); continue; }
+        show(rows[i], true);
+        var cells = rows[i].children; // [name+desc block, h, s, e, v]
+        var h3 = cells[0] && cells[0].querySelector('h3');
+        var desc = cells[0] && cells[0].querySelector('p');
+        if (h3) h3.textContent = p.name;
+        if (desc) desc.textContent = p.desc;
+        var prices = [p.hatchback, p.saloon, p.estate, p.van];
+        for (var k = 0; k < 4; k++) { if (cells[k + 1]) cells[k + 1].textContent = prices[k]; }
+      }
     }
+    // Mobile cards
     var m = document.getElementById('pricingMobile');
     if (m) {
-      var vt = ['Hatchback', 'Saloon', 'Estate / 4×4', 'Van'];
-      m.innerHTML = pkgs.map(function (p) {
-        var prices = [p.hatchback, p.saloon, p.estate, p.van];
-        var cells = prices.map(function (pr, i) {
-          return '<div class="flex items-center justify-between bg-brand-mist rounded-lg px-3 py-2">' +
-            '<span class="text-[11px] uppercase tracking-wider text-brand-ink/55">' + vt[i] + '</span>' +
-            '<span class="display text-brand-blue text-sm">' + esc(pr) + '</span></div>';
-        }).join('');
-        return '<div class="bg-white border border-black/5 rounded-2xl shadow-soft p-5">' +
-          '<h3 class="display text-lg uppercase">' + esc(p.name) + '</h3>' +
-          '<p class="text-brand-ink/60 text-sm mt-1 leading-relaxed">' + esc(p.desc) + '</p>' +
-          '<div class="grid grid-cols-2 gap-2 mt-4">' + cells + '</div></div>';
-      }).join('');
+      var cards = m.children;
+      for (var j = 0; j < cards.length; j++) {
+        var pk = pkgs[j];
+        if (!pk) { show(cards[j], false); continue; }
+        show(cards[j], true);
+        var ch3 = cards[j].querySelector('h3');
+        var cp = cards[j].querySelector('p');
+        if (ch3) ch3.textContent = pk.name;
+        if (cp) cp.textContent = pk.desc;
+        var spans = cards[j].querySelectorAll('span.text-brand-blue');
+        var mp = [pk.hatchback, pk.saloon, pk.estate, pk.van];
+        for (var q = 0; q < spans.length && q < 4; q++) { spans[q].textContent = mp[q]; }
+      }
     }
   }
 
-  function renderAddons(addons) {
+  function updateAddons(addons) {
     var el = document.getElementById('addonsList');
-    if (!el || !addons.length) return;
-    el.innerHTML = addons.map(function (a) {
-      return '<div class="flex items-baseline justify-between gap-3 py-3 border-b border-black/5">' +
-        '<span class="text-brand-ink/80 text-sm">' + esc(a.name) + '</span>' +
-        '<span class="display text-brand-blue text-sm whitespace-nowrap">' + esc(a.price) + '</span></div>';
-    }).join('');
+    if (!el) return;
+    var rows = el.children;
+    for (var i = 0; i < rows.length; i++) {
+      var a = addons[i];
+      if (!a) { show(rows[i], false); continue; }
+      show(rows[i], true);
+      var spans = rows[i].children; // [name span, price span]
+      if (spans[0]) spans[0].textContent = a.name;
+      if (spans[1]) spans[1].textContent = a.price;
+    }
   }
 
-  function renderGallery(items) {
-    var el = document.getElementById('galleryGrid');
-    if (!el || !items.length) return;
-    el.innerHTML = items.map(function (it) {
-      return '<div class="gallery-img"><img src="' + esc(it.image) + '" alt="' + esc(it.alt || '') +
-        '" class="w-full h-full object-cover aspect-[4/5] block" /></div>';
-    }).join('');
-  }
-
-  function renderBeforeAfter(items) {
-    var el = document.getElementById('baGrid');
-    if (!el || !items.length) return;
-    el.innerHTML = items.map(function (it) {
-      return '<div><div class="rounded-2xl overflow-hidden shadow-soft relative bg-brand-ink/5">' +
-        '<span class="absolute top-3 left-3 z-10 bg-brand-blue text-white display uppercase tracking-wider text-[11px] px-3 py-1.5 rounded-full">Before → After</span>' +
-        '<img src="' + esc(it.image) + '" alt="' + esc(it.alt || it.caption || '') + '" class="w-full aspect-[9/8] object-cover" /></div>' +
-        '<div class="mt-4 display uppercase text-lg">' + esc(it.caption || '') + '</div></div>';
-    }).join('');
+  function updateImages(containerId, items, withCaption) {
+    var el = document.getElementById(containerId);
+    if (!el) return;
+    var nodes = el.children;
+    for (var i = 0; i < nodes.length; i++) {
+      var it = items[i];
+      if (!it) { show(nodes[i], false); continue; }
+      show(nodes[i], true);
+      var img = nodes[i].querySelector('img');
+      if (img) {
+        if (it.image) img.src = it.image;
+        img.alt = it.alt || it.caption || '';
+      }
+      if (withCaption) {
+        var cap = nodes[i].querySelector('.mt-4');
+        if (cap && it.caption != null) cap.textContent = it.caption;
+      }
+    }
   }
 })();

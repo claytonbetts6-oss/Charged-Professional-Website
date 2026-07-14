@@ -212,6 +212,8 @@
   "availability": {
     "leadDays": 1,
     "monthsAhead": 3,
-    "blockedDates": []
+    "blockedDates": [
+      "2026-07-15"
+    ]
   }
 }

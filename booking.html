@@ -1124,11 +1124,27 @@ document.getElementById('year').textContent = new Date().getFullYear();
    LIVE CONTENT — keep prices, services, add-ons & days-off in sync with /admin
    ===================================================================== */
 (function loadBookingContent(){
-  fetch('/content/content.json', { cache: 'no-store' })
+  fetch('/content/content.json?t=' + Date.now(), { cache: 'no-store' })
     .then(function (r) { return r.ok ? r.json() : null; })
     .then(function (c) {
       if (!c) return;
       var num = function (v) { var m = String(v == null ? '' : v).match(/(\d+(?:\.\d+)?)/); return m ? Math.round(parseFloat(m[1])) : 0; };
+
+      // Turn "blocked dates" into a clean list of YYYY-MM-DD strings, no matter how
+      // the editor stored them (array of strings, array of objects, or one
+      // comma/space-separated string). This is what makes multiple days off work.
+      function normaliseDates(v) {
+        var items = Array.isArray(v) ? v : (v == null ? [] : [v]);
+        var out = [];
+        items.forEach(function (item) {
+          var str = (typeof item === 'string') ? item : (item && item.date ? item.date : '');
+          String(str).split(/[,\s]+/).forEach(function (part) {
+            var m = part.match(/\d{4}-\d{2}-\d{2}/);
+            if (m) out.push(m[0]);
+          });
+        });
+        return out;
+      }
 
       if (Array.isArray(c.packages) && c.packages.length) {
         var newServices = c.packages.map(function (p) { return p.name + ' \u2014 from \u00a3' + num(p.hatchback); })
@@ -1150,11 +1166,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
       if (c.availability) {
         if (c.availability.leadDays != null) AVAILABILITY.leadDays = c.availability.leadDays;
         if (c.availability.monthsAhead != null) AVAILABILITY.monthsAhead = c.availability.monthsAhead;
-        if (Array.isArray(c.availability.blockedDates)) {
-          AVAILABILITY.blockedDates = c.availability.blockedDates
-            .map(function (d) { return typeof d === 'string' ? d : (d && d.date) || ''; })
-            .filter(Boolean);
-        }
+        AVAILABILITY.blockedDates = normaliseDates(c.availability.blockedDates);
         recomputeBounds();
         renderCalendar();
       }

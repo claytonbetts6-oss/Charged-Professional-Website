@@ -3,7 +3,7 @@
    in place (text / image / links) — never rebuilding them. This keeps all the
    original styling intact. If anything fails, the built-in HTML stays as-is. */
 (function () {
-  fetch('/content/content.json', { cache: 'no-store' })
+  fetch('/content/content.json?t=' + Date.now(), { cache: 'no-store' })
     .then(function (r) { return r.ok ? r.json() : null; })
     .then(function (c) { if (c) apply(c); })
     .catch(function () {});

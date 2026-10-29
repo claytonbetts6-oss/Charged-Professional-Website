@@ -1,0 +1,13 @@
+# Cloudflare Pages headers — always serve the latest editor config, content and pages
+/admin/config.yml
+  Cache-Control: no-cache, no-store, must-revalidate
+/admin/index.html
+  Cache-Control: no-cache, no-store, must-revalidate
+/content/content.json
+  Cache-Control: no-cache, no-store, must-revalidate
+/content.js
+  Cache-Control: no-cache, no-store, must-revalidate
+/index.html
+  Cache-Control: no-cache, no-store, must-revalidate
+/booking.html
+  Cache-Control: no-cache, no-store, must-revalidate

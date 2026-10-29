@@ -3,7 +3,7 @@ backend:
   repo: claytonbetts6-oss/Charged-Professional-Website
   branch: main
   base_url: https://chargedprofessionaldetailing.co.uk
-  auth_endpoint: .netlify/functions/oauth
+  auth_endpoint: oauth
 
 media_folder: "Assets"
 public_folder: "/Assets"

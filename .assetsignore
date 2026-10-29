@@ -1,0 +1,10 @@
+.git
+.gitignore
+.assetsignore
+wrangler.jsonc
+worker.js
+functions
+netlify
+netlify.toml
+oauth.js
+*.md
